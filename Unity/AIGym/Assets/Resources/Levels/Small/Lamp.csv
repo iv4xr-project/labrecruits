@@ -1,0 +1,9 @@
+Button 1,CL
+
+w,w,w,w,w,w
+w,f,f,f,f,w
+w,f:b^Button 1,f,f,f,w
+w,f:a^0,f:cl>n^CL,f,f,w
+w,f,f,f,f,w
+w,f,f,f,f,w
+w,w,w,w,w,w

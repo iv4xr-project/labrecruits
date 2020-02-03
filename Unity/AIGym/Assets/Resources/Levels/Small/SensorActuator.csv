@@ -1,0 +1,11 @@
+b1,d1,d2,d3,
+
+,,,,,
+,,,,,
+w,w,w,w,w,w
+w,f,f,f,f:d^d1,w
+w,f,f,f,f,w
+w,f:a^0,f:b^b1,f,f:d^d2,w
+w,f,f,f,f,w
+w,f,f,f,f:d^d3,w
+w,w,w,w,w,w

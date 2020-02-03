@@ -1,0 +1,23 @@
+Button 1,Door 1
+
+,,,w,w,w,w,w,w,w
+,,,w,f,f,f,f,f,w
+,,,w,f,f:a^Agent 0,f,f,f,w
+w,w,w,w,f,f,f,f:b^Button 1,f,w
+w,f,f,f,f,f,f,f,f,w
+w,f,f,f,f,f,f,f,f,w
+w,w,w,w,f:d>n^Door 1,w,w,f,f,w
+w,f,f,f,f,f,w,f,f,w
+w,f,f:g^Goal,f,f,f,w,f,f,w
+w,w,w,w,w,w,w,w,w,w
+
+,,,w,w,w,w,w,w,w
+,,,w,,,,,,w
+,,,w,,,,,,w
+w,w,w,w,,,,,,w
+w,,,,,,,,,w
+w,,,,,,,,,w
+w,,,,,,,,,w
+w,,,,,,,,,w
+w,,,,,,,,,w
+w,w,w,w,w,w,w,w,w,w

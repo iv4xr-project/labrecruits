@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 96d347c34434d674abfcf6224d2acf63
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - wirePrefab: {fileID: 8488650946985979054, guid: c55085649db4a3f4e85a725ec3ebe5cf,
+      type: 3}
+  - wireBlockPrefab: {fileID: 4121860778435742906, guid: f493bde70fadf9d44863234ad1242912,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
