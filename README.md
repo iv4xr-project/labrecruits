@@ -1,7 +1,6 @@
 # __Lab Recruits__
 
-<img src="https://github.com/iv4xr-project/labrecruits/wiki/uploads/images/LRSS1.png
-">
+![screenshot](https://github.com/iv4xr-project/labrecruits/wiki/uploads/images/LRSS1.png)
 
 **Lab Recruits** is a 3D computer game intended for testing AI. It is work in progress as we work on adding more game features. Currently it does not have an explicit game purpose, although it is usable. With available features now, it is possible to define mazes with moving parts (doors) and the goal of the game could be to reach a certain end-room. A distinctive feature of Lab Recruits is an ASCII-based level definition that allows AI researchers to define their own AI challenge.
 
