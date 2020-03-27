@@ -1,7 +1,17 @@
 # __Lab Recruits__
 
-Lab Recruits is a customizable 3D environment to test and develop agents. Agents can interact with the environment through our [agent framework](https://git.science.uu.nl/muscleai/aigym-iv4xr-aplib). Lab Recruits is an open source application in assistance of the [iv4xr](https://iv4xr-project.eu/) project.
+<img src="https://github.com/iv4xr-project/labrecruits/wiki/uploads/images/LRSS1.png
+">
 
-# Installation
+**Lab Recruits** is a 3D computer game intended for testing AI. It is work in progress as we work on adding more game features. Currently it does not have an explicit game purpose, although it is usable. With available features now, it is possible to define mazes with moving parts (doors) and the goal of the game could be to reach a certain end-room. A distinctive feature of Lab Recruits is an ASCII-based level definition that allows AI researchers to define their own AI challenge.
+
+For more information check the wiki.
+
+#### Note
 
 The project was developed for Unity 2019.2.6f1
+
+
+#### Contributors
+
+Adam Smits, August van Casteren, Bram Smit, Frank Hoogmoed, Jacco van Mourik, Jesse van de Berg, Maurin Voshol, Menno Klunder, Stijn Hinlopen, Tom Tanis, Quinto Veldhuyzen, Sophie Meester.
