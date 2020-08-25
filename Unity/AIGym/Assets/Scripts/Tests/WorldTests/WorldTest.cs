@@ -50,14 +50,14 @@ namespace WorldTests
             string[] rows = pageOne.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
             string[] cells = rows[0].Split(',');
 
-            Sensor sensor = GameObject.Find(cells[0]).GetComponent<Sensor>();
-            Door door = GameObject.Find(cells[1]).GetComponent<Door>();
+            Interactable sensor = GameObject.Find(cells[0]).GetComponent<Interactable>();
+            Toggleable door = GameObject.Find(cells[1]).GetComponent<Toggleable>();
 
             Debug.Log(sensor + " " + door);
 
             Assert.IsFalse(door.isActive);
 
-            sensor.GetComponent<Sensor>().Trigger();
+            sensor.GetComponent<Interactable>().Trigger();
 
             yield return null;
 
@@ -129,14 +129,13 @@ namespace WorldTests
             string[] rows = pageOne.Split(new[] {"\r\n", "\n"}, StringSplitOptions.None);
             string[] cells = rows[0].Split(',');
 
-            Sensor sensor = GameObject.Find(cells[0]).GetComponent<Sensor>();
-            Door door = GameObject.Find(cells[1]).GetComponent<Door>();
-
+            Interactable sensor = GameObject.Find(cells[0]).GetComponent<Interactable>();
+            Toggleable door = GameObject.Find(cells[1]).GetComponent<Toggleable>();
             Debug.Log(sensor + " " + door);
 
             Assert.IsFalse(door.isActive);
 
-            sensor.GetComponent<Sensor>().Trigger();
+            sensor.GetComponent<Toggleable>().ToggleState();
 
             yield return null;
             

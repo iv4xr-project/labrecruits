@@ -108,7 +108,7 @@ AnimatorController:
   m_Name: Doors
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Opened
+  - m_Name: toggleState
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -239,7 +239,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Opened
+    m_ConditionEvent: toggleState
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5069614264877168789}
@@ -285,8 +285,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: Opened
+  - m_ConditionMode: 1
+    m_ConditionEvent: toggleState
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4438289688984041014}

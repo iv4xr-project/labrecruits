@@ -41,8 +41,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9106106911423509544}
-  - component: {fileID: 1459335078155421555}
   - component: {fileID: 2335019394052431894}
+  - component: {fileID: 4310609033846564176}
+  - component: {fileID: 2019042248646949552}
   m_Layer: 0
   m_Name: CeilingLamp
   m_TagString: Decoration
@@ -65,24 +66,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1459335078155421555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5678589098642244023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 116a440e261990347905a0ab11b42705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isActive: 1
-  interactiveBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  connectedObjects: []
-  lighting: {fileID: 0}
 --- !u!65 &2335019394052431894
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -96,6 +79,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.98413837, y: 0.084391594, z: 0.07056396}
   m_Center: {x: -0.00000011920929, y: 1.9989634, z: -0.0010791197}
+--- !u!95 &4310609033846564176
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678589098642244023}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf0bb7c9ca328e0438389d55b64f0e51, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2019042248646949552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678589098642244023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b7d2d0b4bf1c419c5cf39f10694a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 1
+  onToggle:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6472756352579588971
 GameObject:
   m_ObjectHideFlags: 0

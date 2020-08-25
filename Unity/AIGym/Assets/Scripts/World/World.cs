@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Linq;
+using UnityEngine.Events;
 
 /// <summary>
 /// World builds a level from a given CSV file. 
@@ -96,6 +97,7 @@ public class World : MonoBehaviour
 
     private void BuildLevel(string path)
     {
+        Debug.Log($"Loading level: {path}");
         if (path == "")
             return;
 
@@ -112,7 +114,8 @@ public class World : MonoBehaviour
         }
 
         string[] sheets = SplitSheets(text);
-        bool hasLinks = IsNoFloor(sheets[0]);
+        Debug.Log($"Found {sheets.Length} sheets.");
+        bool hasLinks = sheets.Length > 1 && IsNoFloor(sheets[0]);
 
         List<List<(string, Vector3, EntityGroup)>> floors = (hasLinks) ?
             ExtractSpawnableObjects(sheets.Skip(1).ToArray()) :
@@ -141,10 +144,11 @@ public class World : MonoBehaviour
 
     private void PostBuildConfiguration(EnvironmentConfig config)
     {
+#warning TODO: Do we still need post build?
         // lamp brightness
+        /*
         foreach (var lamp in FindObjectsOfType<Lamp>())
             lamp.lighting.intensity = config.light_intensity;
-
         // remove links
         foreach (var a in config.remove_links)
         {
@@ -161,7 +165,7 @@ public class World : MonoBehaviour
             var actuator = GameObject.Find(a.object2).GetComponent<Actuator>();
             if (sensor != null && actuator != null)
                 sensor.AddActuator(actuator);
-        }
+        }*/
     }
 
     /// <summary>
@@ -169,7 +173,9 @@ public class World : MonoBehaviour
     /// </summary>
     public List<List<(string, Vector3, EntityGroup)>> ExtractSpawnableObjects(string[] floors)
     {
+        if (floors.Length == 0) throw new ArgumentException("Expected a floor, but instead got an empty list!");
         int levelWidth = floors[0].Split(new[] { "\r\n", "\n" }, 2, StringSplitOptions.RemoveEmptyEntries)[0].Split(',').Length;
+        Debug.Log($"Level width: {levelWidth}");
 
         //Add a list for all objects in a single floor
         var floorSpawnables = new List<List<(string, Vector3, EntityGroup)>>();
@@ -185,7 +191,6 @@ public class World : MonoBehaviour
                     let symbol = obj.Split(new char[] { ID_SEPERATOR, ROT_SEPERATOR, COL_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries)[0]
                     let placeableGroup = placeablesMap.ContainsKey(symbol) ? placeablesMap[symbol].@group : placeablesMap["f"].@group
                     select (obj, position, placeableGroup);
-
             floorSpawnables.Add(s.ToList());
         }
 
@@ -223,7 +228,7 @@ public class World : MonoBehaviour
         if (tile == "cb")
         {
             if (color.Length < 2) UserErrorInfo.ErrorWriter.AddMessage($"The ColorButton '{obj_id}' requires a color parameter");
-            instance.GetComponent<ColorButton>().SetColor(Utils.colorFromHexString(color[1]));
+            instance.GetComponent<Colorized>().SetColor(Utils.colorFromHexString(color[1]));
         }
 
         if (orientation.Length > 1)
@@ -276,14 +281,23 @@ public class World : MonoBehaviour
                     UserErrorInfo.ErrorWriter.AddMessage($"Invalid connected object id '{cells[i]}'. The object was not found in the level. Line: {j} Column: {i}");
                     continue;
                 }
-
-                if (link.GetComponent<Sensor>())
+                if (link.GetComponent<Interactable>())
                 {
                     //TODO Apply pseudo-random seed
                     bool broken = wireBreaking && Random.Range(0, 2) == 0;
 
                     if (!broken)
-                        link.GetComponent<Sensor>().actuators.Add(connector.GetComponent<Actuator>());
+                    {
+                        // Handle buttons
+                        if (connector?.GetComponent<Toggleable>())
+                            link.GetComponent<Interactable>()?.onInteract?.AddListener(_ => connector.GetComponent<Toggleable>().ToggleState());
+
+                        if (connector?.GetComponent<ColorScreen>())
+                            link.GetComponent<Interactable>()?.onInteract?.AddListener(connector.GetComponent<ColorScreen>().UpdateScreen);
+
+                        // Handle switches
+                        link.GetComponent<Toggleable>()?.onToggle.AddListener(connector.GetComponent<Toggleable>().SetState);
+                    }
 
                     GameObject wire = _wireBuilder.CreateWire(link.transform, connector.transform, 0.125f, 0.25f, broken);
                     wire.transform.SetParent(link.transform);

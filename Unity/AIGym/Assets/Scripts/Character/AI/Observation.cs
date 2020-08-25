@@ -9,39 +9,52 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 /// <summary>
 /// Collects the observed gamestate from an agent's character
 /// </summary>
 
-[Serializable]
-public class Observation {
-
-    public string agentID;
-    public int tick;
-    public Vector3 agentPosition;
+public struct SerializedAgent
+{
+    public string id;
+    public Vector3 position;
     public Vector3 velocity;
     public bool didNothing;
+}
 
-    public List<Entity> entities = new List<Entity>();
+public struct SerializedMeta
+{
+    public int tick;
+    public DateTime time;
+}
+
+public class Observation : IAPLSerializable
+{
+    public SerializedMeta meta;
+    public SerializedAgent agent;
+    public HashSet<APLSynced> objects = new HashSet<APLSynced>();
 
     public int[] navMeshIndices;
 
-    private static readonly HashSet<string> ignored = new HashSet<string> { "Wall", "Floor", "Decoration", "Player", "Wire"};
+    private static readonly HashSet<string> ignored = new HashSet<string> { "Wall", "Floor", "Player", "Wire"};
 
     public Observation(string agentID) {
-        this.agentID = agentID;
+        agent.id = agentID;
     }
 
     /// <summary>
     /// Records the current state of the world from the perspective of a Character
     /// </summary>
     public void Observe(Character character, int gameTick, NavMeshContainer nav, AgentCommandType usedAction) {
-        agentPosition = character.transform.position;
-        tick = gameTick;
-        didNothing = usedAction == AgentCommandType.DONOTHING;
+        objects.Clear();
+
+        meta.tick = gameTick;
+        meta.time = DateTime.Now;
+
+        agent.position = character.transform.position;
+        agent.didNothing = usedAction == AgentCommandType.DONOTHING;
         
-        entities.Clear();
         AddAllVisibleObjects(character);
 
         navMeshIndices = GetAllVisibleVertexIndices(character, nav);
@@ -59,7 +72,7 @@ public class Observation {
     /// </summary>
     /// <param name="character">The character as a reference point</param>
     public int[] GetAllVisibleVertexIndices(Character character, NavMeshContainer nav) {
-        Vector3 eyePosition = agentPosition + character.relativeEyePosition;
+        Vector3 eyePosition = agent.position + character.relativeEyePosition;
         var colliders = GetNearbyBoundsColliders(eyePosition, character.viewDistanceSqr);
         
         List<int> visibleVertexIndices = new List<int>();
@@ -70,7 +83,7 @@ public class Observation {
 
             if (diff.sqrMagnitude >= character.viewDistanceSqr)     continue; // If the vertex is outside the character's vision radius
             if (colliders.Any(c => c.Contains(v)))                  continue; // If the vertex is covered by any collider
-            if (Physics.Raycast(eyePosition, diff, diff.magnitude)) continue; // If the vertex is behind another object
+            if (Physics.Raycast(eyePosition, diff, diff.magnitude, (1 << 9) | (1 << 10))) continue; // If the vertex is behind another object
             
             visibleVertexIndices.Add(i);
         }
@@ -86,16 +99,17 @@ public class Observation {
     /// <returns>A list of colliders that are in range</returns>
     private List<Bounds> GetNearbyBoundsColliders(Vector3 eyePosition, float viewDistanceSqr) {
         // @Incomplete, compute these references once. Also, maybe there is a better way to capture all Colliders that can block parts of the navmesh.
-        var a = GameObject.FindObjectsOfType<Door>();
-        var b = GameObject.FindGameObjectsWithTag("Dynamic");
+        //var a = GameObject.FindObjectsOfType<Door>();
+        var b = GameObject.FindGameObjectsWithTag("Dynamic").Union(GameObject.FindGameObjectsWithTag("Decoration")).ToArray();
 
         var colliders = new List<Bounds>();
-        
+#warning TODO: Fix door collider observation:
+        /*
         for (int i = 0; i < a.Length; i++) {
             var o = a[i].GetComponentInChildren<Collider>();
             if (o.enabled && (o.transform.position - eyePosition).sqrMagnitude <= viewDistanceSqr)
                 colliders.Add(o.bounds);
-        }
+        }*/
 
         for (int i = 0; i < b.Length; i++) {
             var o = b[i].GetComponent<Collider>();
@@ -112,7 +126,7 @@ public class Observation {
     /// <param name="radius">The radius of the vision the <see cref="Character"/> has.</param>
     /// <returns>A <see cref="List{GameObject}"/> of all visible <see cref="GameObject"/>s.</returns>
     public void AddAllVisibleObjects(Character character) {
-        Vector3 eye = agentPosition + character.relativeEyePosition; //Translates player position to player view.
+        Vector3 eye = agent.position + character.relativeEyePosition; //Translates player position to player view.
         Collider[] hitColliders = Physics.OverlapSphere(eye, Character.viewDistance); // @Todo, see if we can use layer mask to strip out walls/floors
 
         foreach (Collider hitCollider in hitColliders) {
@@ -120,14 +134,12 @@ public class Observation {
             
             if (ignored.Contains(o.tag))          continue; // Object needs to be interesting
             if (!IsObjectVisibleToPlayer(o, eye)) continue; // Object can't be blocked
-            
-            Stateful s = null;
-            if (o.transform.parent.TryGetComponent(out s) || o.transform.TryGetComponent(out s)) // @Todo, standardize objects to have the script on themselves OR the parent
-                entities.Add(new InteractiveEntity(o, s));
-            else if (o.tag == "Dynamic")
-                entities.Add(new DynamicEntity(o));
-            else
-                entities.Add(new Entity(o));
+
+            // Get relevant APLSynced scripts
+            var synced = new List<APLSynced>();
+            o.GetComponentsInParent(false, synced);
+            o.GetComponentsInChildren(false, synced);
+            objects.UnionWith(synced);
         }
     }
 
@@ -167,7 +179,12 @@ public class Observation {
     /// <summary>
     /// Serialize this entire object into a Json string, making it ready to be sent.
     /// </summary>
-    public string Serialize() {
-        return JsonConvert.SerializeObject(this);
+    public JObject APLSerialize() {
+        var objectsList = objects.Select(x => x.APLSerialize()).ToList();
+        return JObject.FromObject(new {
+            meta,
+            agent,
+            objectsList,
+        });
     }
 }   

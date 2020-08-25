@@ -5,13 +5,18 @@ at Utrecht University within the Software and Game project course.
 ©Copyright Utrecht University (Department of Information and Computing Sciences)
 */
 
+using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// A button with a color 
 /// </summary>
-public class ColorButton : Button
+[RequireComponent(typeof(Interactable))]
+[JsonObject(MemberSerialization.OptIn)]
+public class Colorized : MonoBehaviour
 {
+    [JsonProperty]
     private Color color;
 
     public void SetColor (Color c)
@@ -23,14 +28,5 @@ public class ColorButton : Button
     public Color GetColor()
     {
         return color;
-    }
-
-    /// <summary>
-    /// Pass the color component to the actuators that listen to this.
-    /// </summary>
-    public override void Trigger()
-    {
-        animator.SetTrigger("Push");
-        base.Trigger(color, name);
     }
 }

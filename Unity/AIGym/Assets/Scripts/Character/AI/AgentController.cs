@@ -60,7 +60,7 @@ public class AgentController {
             case AgentCommandType.INTERACT:
                 AgentCommand interact = c as AgentCommand;
                 string interactWith = interact.targetId;
-                GameObject.Find(interactWith).GetComponent<Sensor>().Trigger();
+                GameObject.Find(interactWith).GetComponent<Interactable>().Interact();
                 break;
         }
 

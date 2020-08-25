@@ -4,10 +4,11 @@ at Utrecht University within the Software and Game project course.
 
 ©Copyright Utrecht University (Department of Information and Computing Sciences)
 */
-using System.Collections;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
+[JsonObject(MemberSerialization.OptIn)]
 public class FireHazard : Hazard
 {
     public static float SPREAD_SPEED;
@@ -46,6 +47,21 @@ public class FireHazard : Hazard
                         }
                     }
             Reset();
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent<Character>(out var character))
+        {
+            character.Health -= 5;
+            string[] moods =
+            {
+                "Ouch",
+                ":(",
+                "That hurts!"
+            };
+            character.SetMood(moods[Random.Range(0, moods.Length)]);
         }
     }
 

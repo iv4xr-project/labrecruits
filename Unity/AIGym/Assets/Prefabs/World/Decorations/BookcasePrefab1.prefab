@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6539027589353602808}
   - component: {fileID: 4272761629270565438}
-  m_Layer: 0
+  - component: {fileID: -797009182039582281}
+  m_Layer: 10
   m_Name: BookcasePrefab1
   m_TagString: Decoration
   m_Icon: {fileID: 0}
@@ -47,6 +48,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3624256, y: 2.0721776, z: 1.8587158}
   m_Center: {x: -0.002168253, y: 1.0310887, z: 0.4247737}
+--- !u!114 &-797009182039582281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233887566778181615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  syncBoxColliders: 1
+  LayerIgnore: 
 --- !u!1001 &982804921179440039
 PrefabInstance:
   m_ObjectHideFlags: 0

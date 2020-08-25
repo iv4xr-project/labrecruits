@@ -58,17 +58,19 @@ public class DynamicEntity : Entity
 // An entity with a boolean state, and a bounding box for interactions
 public class InteractiveEntity : Entity
 {
+    public InteractiveEntity(GameObject ctx) : base(ctx) { }
+    /*
     public bool isActive;
     public List<string> connectedObjects; // @refactor this into one time only
     public Vector3 center; // Bounding box position in world space
     public Vector3 extents; // Half box size 
 
-    public InteractiveEntity(GameObject context, Stateful s) : base(context)
+    public InteractiveEntity(GameObject context, Interactable s) : base(context)
     {
         this.isActive = s.isActive;
         this.connectedObjects = s.connectedObjects;
         this.extents = s.interactiveBounds.extents;
         this.center = s.interactiveBounds.center;
         this.type = EntityType.Interactive;
-    }
+    }*/
 }

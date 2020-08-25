@@ -166,8 +166,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5290406310658371955}
   - component: {fileID: 869749208673551348}
-  - component: {fileID: 3583688260021849564}
   - component: {fileID: 3024633236333207523}
+  - component: {fileID: 673196733061068720}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Switch
@@ -210,21 +210,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3583688260021849564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9164848719866102624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2eb6b3d2743277468fb4f7b6f3eeb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actuators: []
-  MaxInteractCooldown: 20
-  MaxInteractDistance: 1.1
 --- !u!65 &3024633236333207523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -238,3 +223,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &673196733061068720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164848719866102624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b7d2d0b4bf1c419c5cf39f10694a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: 1
+  interactionCooldown: 0.5
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  toggleState: 0

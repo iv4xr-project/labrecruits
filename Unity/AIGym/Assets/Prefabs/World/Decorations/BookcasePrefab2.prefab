@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8007656605336018815}
   - component: {fileID: 1068555581082305465}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BookcasePrefab2
   m_TagString: Decoration
   m_Icon: {fileID: 0}

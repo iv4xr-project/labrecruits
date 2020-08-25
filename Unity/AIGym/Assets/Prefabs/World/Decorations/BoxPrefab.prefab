@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2028328914757977097}
   - component: {fileID: 8066202429740965095}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoxPrefab
   m_TagString: Decoration
   m_Icon: {fileID: 0}

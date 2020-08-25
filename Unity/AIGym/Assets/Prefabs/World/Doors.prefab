@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4043663363245878575}
   - component: {fileID: 1028689607683661631}
-  - component: {fileID: 1028689607683661630}
+  - component: {fileID: -2681201272882719587}
   m_Layer: 0
   m_Name: Doors
   m_TagString: Door
@@ -53,7 +53,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1028689607683661630
+--- !u!114 &-2681201272882719587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,9 +62,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028689607683661628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ee4976a7727f4e479404a562f406be8, type: 3}
+  m_Script: {fileID: 11500000, guid: e22b7d2d0b4bf1c419c5cf39f10694a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 0
+  interactionCooldown: 1
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  toggleState: 0
 --- !u!1 &3741706132170617620
 GameObject:
   m_ObjectHideFlags: 0

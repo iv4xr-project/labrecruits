@@ -5,12 +5,13 @@ at Utrecht University within the Software and Game project course.
 ©Copyright Utrecht University (Department of Information and Computing Sciences)
 */
 
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 /// <summary>
 /// Minimized container for a navmesh containing just the vertices and indices.
 /// </summary>
-public struct NavMeshContainer
+public struct NavMeshContainer : IAPLSerializable
 {
     public Vector3[] vertices;
     public int[] indices;
@@ -20,4 +21,7 @@ public struct NavMeshContainer
         vertices = navVertices;
         indices = navIndices;
     }
+
+    public JObject APLSerialize()
+        => JObject.FromObject(this);
 }

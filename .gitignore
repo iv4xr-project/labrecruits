@@ -1,0 +1,45 @@
+# =============== #
+# Unity generated #
+# =============== #
+Unity/AIGym/[Tt]emp/
+Unity/AIGym/[Oo]bj/
+Unity/AIGym/[Bb]uild
+Unity/AIGym/[Bb]uilds/
+Unity/AIGym/[Ll]ibrary/
+Unity/AIGym/sysinfo.txt
+Unity/AIGym/*.stackdump
+Unity/AIGym/Assets/AssetStoreTools*
+Unity/AIGym/*.apk
+Unity/AIGym/*.unitypackage
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+[Ee]xported[Oo]bj/
+.vs/
+/*.userprefs
+/*.csproj
+/*.pidb
+*.pidb.meta
+/*.suo
+/*.sln*
+/*.user
+/*.unityproj
+/*.booproj
+.consulo/
+/*.tmp
+/*.svd
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+Corridor/Library/ShaderCache/
+Corridor/Library/metadata/
