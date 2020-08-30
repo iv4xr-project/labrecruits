@@ -180,3 +180,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: 3170787636384594274}
+  syncBoxColliders: 1
+  LayerIgnore: 

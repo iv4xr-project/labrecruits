@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2335019394052431894}
   - component: {fileID: 4310609033846564176}
   - component: {fileID: 2019042248646949552}
+  - component: {fileID: -2581140230293346634}
   m_Layer: 0
   m_Name: CeilingLamp
   m_TagString: Decoration
@@ -114,6 +115,21 @@ MonoBehaviour:
   onToggle:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-2581140230293346634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678589098642244023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  syncBoxColliders: 1
+  LayerIgnore: 
 --- !u!1 &6472756352579588971
 GameObject:
   m_ObjectHideFlags: 0

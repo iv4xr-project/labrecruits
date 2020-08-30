@@ -21,6 +21,7 @@ public struct SerializedAgent
     public Vector3 position;
     public Vector3 velocity;
     public bool didNothing;
+    public int health;
 }
 
 public struct SerializedMeta
@@ -54,6 +55,7 @@ public class Observation : IAPLSerializable
 
         agent.position = character.transform.position;
         agent.didNothing = usedAction == AgentCommandType.DONOTHING;
+        agent.health = character.Health;
         
         AddAllVisibleObjects(character);
 

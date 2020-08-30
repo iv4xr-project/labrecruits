@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2028328914757977097}
   - component: {fileID: 8066202429740965095}
+  - component: {fileID: 3241085389892198347}
   m_Layer: 10
   m_Name: BoxPrefab
   m_TagString: Decoration
@@ -45,6 +46,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.47, y: 0.47, z: 0.45}
   m_Center: {x: 0, y: 0.24, z: 0}
+--- !u!114 &3241085389892198347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5738464133151254014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  syncBoxColliders: 1
+  LayerIgnore: 
 --- !u!1001 &8168178572582379994
 PrefabInstance:
   m_ObjectHideFlags: 0
