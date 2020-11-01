@@ -5,8 +5,6 @@ at Utrecht University within the Software and Game project course.
 ©Copyright Utrecht University (Department of Information and Computing Sciences)
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +15,8 @@ public class UIFeedback : MonoBehaviour
     //Variables that hold the text fields that have to be assigned
     public Text idField,
                 posXField, posYField, posZField,
-                rotXField, rotYField, rotZField;
+                rotXField, rotYField, rotZField,
+                healthField, moodField;
 
     void Update()
     {
@@ -47,15 +46,18 @@ public class UIFeedback : MonoBehaviour
     /// </summary>
     void SetInspectorFields()
     {
-            Vector3 position = activeCharacter._transform.localPosition;
-            Vector3 rotation = activeCharacter._transform.localRotation.eulerAngles;
+        Vector3 position = activeCharacter._transform.localPosition;
+        Vector3 rotation = activeCharacter._transform.localRotation.eulerAngles;
 
-            posXField.text = TruncateFloat(position.x).ToString();
-            posYField.text = TruncateFloat(position.y).ToString();
-            posZField.text = TruncateFloat(position.z).ToString();
+        posXField.text = TruncateFloat(position.x).ToString();
+        posYField.text = TruncateFloat(position.y).ToString();
+        posZField.text = TruncateFloat(position.z).ToString();
 
-            rotXField.text = TruncateFloat(rotation.x).ToString();
-            rotYField.text = TruncateFloat(rotation.y).ToString();
-            rotZField.text = TruncateFloat(rotation.z).ToString();
+        rotXField.text = TruncateFloat(rotation.x).ToString();
+        rotYField.text = TruncateFloat(rotation.y).ToString();
+        rotZField.text = TruncateFloat(rotation.z).ToString();
+
+        healthField.text = activeCharacter.Health.ToString();
+        moodField.text = activeCharacter.GetMood().value;
     }
 }

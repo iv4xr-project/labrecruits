@@ -8,48 +8,48 @@ at Utrecht University within the Software and Game project course.
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Newtonsoft.Json;
 /// <summary>
 /// Adds input colors together and displays it on a panel
 /// </summary>
-public class ColorScreen : Actuator
+[JsonObject(MemberSerialization.OptIn)]
+public class ColorScreen : MonoBehaviour
 {
     private Material panelMaterial;
     private Dictionary<string, Color> mix; // Keep a list of colors that have been added. 
+
+    [JsonProperty]
+    public Color color { get; private set; } = Color.black;
 
     void Awake()
     {
         panelMaterial = transform.Find("Panel").GetComponent<MeshRenderer>().material;
         mix = new Dictionary<string, Color>();
-        if (!isActive) panelMaterial.color = Color.black;
+        panelMaterial.color = color;
     }
+
+    public void UpdateScreen(GameObject trigger)
+        => UpdateScreen(trigger.GetComponent<Colorized>().GetColor(), trigger.name);
 
     /// <summary>
     /// Update the color mixture to include a new color
     /// </summary>
-    public override void Actuate(object o1, object o2)
+    public void UpdateScreen(Color color, string buttonID)
     {
-        base.Actuate(o1, o2);
+        if (mix.ContainsKey(buttonID))
+            mix.Remove(buttonID);
+        else
+            mix.Add(buttonID, color);
 
-        Color color = (Color)o1;
-        string buttonID = (string)o2;
-
-        if (mix.ContainsKey(buttonID)) mix.Remove(buttonID);
-        else                           mix.Add(buttonID, color);
-        
-        Vector3 a = Vector3.zero;
+        color = Color.black;
         foreach (var k in mix.Keys)
-        {
-            var c = mix[k];
-            a.x += c.r;
-            a.y += c.g;
-            a.z += c.b;
-        }
+            color += mix[k];
 
-        panelMaterial.color = new Color(Mathf.Min(a.x,1), Mathf.Min(a.y,1), Mathf.Min(a.z, 1));
+        panelMaterial.color = color;
+
+        GetComponent<APLSynced>()?.APLSync();
     }
 
-    public Color GetColor()
-    {
-        return panelMaterial.color;
-    }
+    public Color GetColor() 
+        => color;
 }

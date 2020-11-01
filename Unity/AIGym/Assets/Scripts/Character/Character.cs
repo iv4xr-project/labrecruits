@@ -28,20 +28,31 @@ public class Character : MonoBehaviour
     public float eyeHeight = 1.2f;
     public Vector3 relativeEyePosition;
 
+    public bool IsAlive => _health > 0;
     public bool IsMoving => Math.Abs(_moveDirection.x) > 0.1f || Math.Abs(_moveDirection.z) > 0.1f;
     public bool wasMoving;
     public Vector3 _moveDirection = Vector3.zero;
 
+    public int maxHealth = 100;
+   
     public Transform model;
 
     private CharacterController _characterController;
     private Animator _animator;
     private Vector3? targetLocation = null;
     private bool circleLeft = false;
+    private Mood _mood;
+    private int _health;
 
     public Color debugColor;
 
     public Transform _transform; //Cached transform, to prevent Unity safety code
+
+    public struct Mood
+    {
+        public DateTime lastSet;
+        public string value;
+    }
 
     private void Awake()
     {
@@ -52,9 +63,27 @@ public class Character : MonoBehaviour
         relativeEyePosition = GetComponentInChildren<Camera>().transform.position - _transform.position;
     }
 
+    public int Health
+    {
+        get { return _health; }
+        set
+        {
+            _health = value;
+            if (_health <= 0)
+                UserErrorInfo.ErrorWriter.AddMessage($"Agent {agentID} has died.", true, ErrorType.General);
+        }
+    }
+
     void Start()
     {
         OnStartEvent?.Invoke(this, gameObject);
+
+        _mood = new Mood
+        {
+            lastSet = DateTime.Now,
+            value = "",
+        };
+        _health = maxHealth;
     }
 
     void OnDestroy()
@@ -150,6 +179,7 @@ public class Character : MonoBehaviour
     /// <param name="direction">The Vector3 direction to move towards</param>
     public void Move(Vector3 direction)
     {
+        if (!IsAlive) return;
         direction = direction.normalized;
         model.rotation = Quaternion.Slerp(model.rotation, Quaternion.LookRotation(direction, Vector3.up), 10f * Time.deltaTime);
         _moveDirection.x = characterSpeed * direction.x;
@@ -174,7 +204,7 @@ public class Character : MonoBehaviour
     
     public void MoveJump()
     {
-        if (_characterController.isGrounded)
+        if (_characterController.isGrounded && IsAlive)
             _moveDirection.y = jumpForce;
     }
     
@@ -184,6 +214,7 @@ public class Character : MonoBehaviour
     /// <param name="rotate_degrees">The rotation in degrees</param>
     public void Turn(float rotate_degrees)
     {
+        if (!IsAlive) return;
         _transform.eulerAngles += new Vector3(0, rotate_degrees, 0);
     }
 
@@ -201,16 +232,35 @@ public class Character : MonoBehaviour
     /// </summary>
     public void Interact()
     {
+        if (!IsAlive) return;
+        Debug.Log("Trying to interact...");
         GameObject[] switches = GameObject.FindGameObjectsWithTag("Switch");
         foreach (GameObject @switch in switches)
         {
-            var sensor = @switch.GetComponent<Sensor>();
-            if (!sensor.interactiveBounds.Contains(transform.position)) continue;
-            sensor.Trigger();
+            var sensor = @switch.GetComponent<Interactable>();
+            if (!sensor.interactable || Vector3.Distance(sensor.transform.position, this.transform.position) > 0.5) continue;
+            Debug.Log($"Interacting with: {sensor.name}, distance {Vector3.Distance(sensor.transform.position, this.transform.position)}");
+            sensor.Interact();
             return;
         }
         
     }
+
+    /// <summary>
+    /// Set the mood of the character to a given string.
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetMood(string value)
+    {
+        _mood.value = value;
+        _mood.lastSet = DateTime.Now;
+    }
+
+    /// <summary>
+    /// Returns the current mood.   
+    /// </summary>
+    /// <returns></returns>
+    public Mood GetMood() => _mood;
 
     /// <summary>
     /// These methods should not be included in the binary

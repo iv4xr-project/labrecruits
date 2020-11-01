@@ -73,19 +73,19 @@ public class Lab : MonoBehaviour
         switch (msg.cmd)
         {
             case RequestType.DISCONNECT:
-                var disconnectRequest = Request<bool>.CreateFrom(message);
+                var disconnectRequest = RawRequest<bool>.CreateFrom(message);
                 UserErrorInfo.ErrorWriter.AddMessage("Client requested a DISCONNECT");
                 Respond(client, disconnectRequest, true);
                 break;
 
             case RequestType.PAUSE:
-                var pauseRequest = Request<bool>.CreateFrom(message);
+                var pauseRequest = RawRequest<bool>.CreateFrom(message);
                 Pause();
                 Respond(client, pauseRequest, true);
                 break;
 
             case RequestType.START:
-                var startRequest = Request<object, bool>.CreateFrom(message);
+                var startRequest = RawRequest<object, bool>.CreateFrom(message);
                 Play();
                 Respond(client, startRequest, true);
                 break;
@@ -131,7 +131,7 @@ public class Lab : MonoBehaviour
     /// <param name="client">The client socket</param>
     /// <param name="request">The original request</param>
     /// <param name="response">The response</param>
-    private void Respond<Argument, Response>(Socket client, Request<Argument, Response> request, Response response) => OnSend.Invoke(client, request.WithResponse(response));
+    private void Respond<Argument, Response>(Socket client, RawRequest<Argument, Response> request, Response response) => OnSend.Invoke(client, request.WithResponse(response));
 
     /// <summary>
     /// Stop processing incoming messages. This keeps all clients waiting for their responses.

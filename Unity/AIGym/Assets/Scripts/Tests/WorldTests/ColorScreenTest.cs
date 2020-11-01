@@ -50,10 +50,10 @@ namespace WorldTests
             for (int i = 0; i < rows.Length; i++)
             {
                 string[] cells = rows[i].Split(',');
-                ColorButton cb = GameObject.Find(cells[0]).GetComponent<ColorButton>();
+                Colorized cb = GameObject.Find(cells[0]).GetComponent<Colorized>();
                 predictedColor += cb.GetColor();
 
-                cb.Trigger();
+                cb.GetComponent<Interactable>().Trigger();
 
                 var testColor = new Color(Mathf.Min(predictedColor.r, 1), Mathf.Min(predictedColor.g, 1), Mathf.Min(predictedColor.b, 1));
 
@@ -73,11 +73,11 @@ namespace WorldTests
             string[] rows = pageOne.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 
             string[] cells = rows[0].Split(',');
-            ColorButton cb = GameObject.Find(cells[0]).GetComponent<ColorButton>();
+            Colorized cb = GameObject.Find(cells[0]).GetComponent<Colorized>();
             ColorScreen cs = GameObject.Find(cells[1]).GetComponent<ColorScreen>();
 
-            cb.Trigger();
-            cb.Trigger();
+            cb.GetComponent<Interactable>().Trigger();
+            cb.GetComponent<Interactable>().Trigger();
 
             Assert.IsTrue(cs.GetColor() == Color.black);
         }

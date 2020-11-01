@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2678510457472424087}
   - component: {fileID: 6372872399953535649}
   - component: {fileID: 814154024299585112}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TableModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7857733349437047130}
+  - component: {fileID: -9044338181122284075}
   m_Layer: 0
   m_Name: TablePlantPrefab
   m_TagString: Decoration
@@ -112,6 +113,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-9044338181122284075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487431996331495452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  syncBoxColliders: 1
+  LayerIgnore: 
 --- !u!1 &2752357993810460318
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +346,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3494591629172403755}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 066aa11015419cb469d8cad0ccd80d2d,
+        type: 3}
+      propertyPath: m_Name
+      value: Plantpot2
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 066aa11015419cb469d8cad0ccd80d2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -399,11 +420,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 066aa11015419cb469d8cad0ccd80d2d,
-        type: 3}
-      propertyPath: m_Name
-      value: Plantpot2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 066aa11015419cb469d8cad0ccd80d2d, type: 3}

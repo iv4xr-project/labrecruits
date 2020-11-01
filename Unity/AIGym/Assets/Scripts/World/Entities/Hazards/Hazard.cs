@@ -53,11 +53,13 @@ public abstract class Hazard : MonoBehaviour
     /// </summary>
     public void Interact(float radius)
     {
+#warning TODO: What is hazard interact?:
+        /*
         Collider[] colliders = Physics.OverlapSphere(transform.localPosition, radius);
         foreach(Collider c in colliders)
         {
-            if (c.gameObject.tag == "Switch")
-                c.gameObject.GetComponent<Button>().Trigger();
-        }
+            // If c is a button, trigger it.
+            c.gameObject.GetComponent<Button>()?.Trigger();
+        }*/
     }
 }

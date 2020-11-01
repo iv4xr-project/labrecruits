@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1027913218315084746}
   - component: {fileID: 8556376721724782083}
+  - component: {fileID: 8895736369272043715}
   m_Layer: 0
   m_Name: DeskPrefab
   m_TagString: Decoration
@@ -45,6 +46,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.82, y: 1.53, z: 1.77}
   m_Center: {x: 0.02, y: 0.81, z: -0.5}
+--- !u!114 &8895736369272043715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856742968852349094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  syncBoxColliders: 1
+  LayerIgnore: 
 --- !u!1001 &5508835875997297352
 PrefabInstance:
   m_ObjectHideFlags: 0

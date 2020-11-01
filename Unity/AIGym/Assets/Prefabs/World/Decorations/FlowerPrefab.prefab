@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 729074854057909992}
   - component: {fileID: 3517544015743150898}
+  - component: {fileID: -174356572617712344}
   m_Layer: 0
   m_Name: FlowerPrefab
   m_TagString: Decoration
@@ -45,6 +46,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.28, z: 0.2}
   m_Center: {x: 0.01, y: 0.14, z: 0}
+--- !u!114 &-174356572617712344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607633906060908406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  syncBoxColliders: 1
+  LayerIgnore: 
 --- !u!1001 &6966541397482785510
 PrefabInstance:
   m_ObjectHideFlags: 0

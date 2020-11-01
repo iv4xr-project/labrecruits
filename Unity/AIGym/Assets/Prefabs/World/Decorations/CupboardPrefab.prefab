@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1137882715511686041}
   - component: {fileID: 2251008267991593280}
   - component: {fileID: 1921099476584605286}
-  m_Layer: 0
+  - component: {fileID: 392798219462753150}
+  m_Layer: 10
   m_Name: CupboardModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,6 +79,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &392798219462753150
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525129731936861737}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.013333334, y: 0.028333334, z: 0.020333333}
+  m_Center: {x: 0, y: 0.013666667, z: 0}
 --- !u!1 &6997590405170311699
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6289055598081032192}
-  - component: {fileID: 8253172460595118579}
+  - component: {fileID: -140201002371414470}
   m_Layer: 0
   m_Name: CupboardPrefab
   m_TagString: Decoration
@@ -110,16 +124,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8253172460595118579
-BoxCollider:
+--- !u!114 &-140201002371414470
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6997590405170311699}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.85, z: 0.61}
-  m_Center: {x: 0, y: 0.41, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  syncBoxColliders: 1
+  LayerIgnore: 

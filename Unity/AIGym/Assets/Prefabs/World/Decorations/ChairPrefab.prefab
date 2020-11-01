@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9058522924862209403}
   - component: {fileID: 766898308275250132}
-  m_Layer: 0
+  - component: {fileID: 1713290304222673141}
+  m_Layer: 10
   m_Name: ChairPrefab
   m_TagString: Decoration
   m_Icon: {fileID: 0}
@@ -45,6 +46,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9005094, y: 1.3927091, z: 0.88696}
   m_Center: {x: 0.11033842, y: 0.6957105, z: -0.006280005}
+--- !u!114 &1713290304222673141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607323659734009951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  SyncBoxColliders: 1
+  LayerIgnore: 
 --- !u!1001 &3074106662222463911
 PrefabInstance:
   m_ObjectHideFlags: 0

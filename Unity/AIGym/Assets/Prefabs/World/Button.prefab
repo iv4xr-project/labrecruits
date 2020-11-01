@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1765276888687995244}
   - component: {fileID: 3325024467115219832}
-  - component: {fileID: 1517174622046767965}
   - component: {fileID: 8896268497538145572}
   - component: {fileID: -1130752788922416319}
+  - component: {fileID: -6120297108244325307}
+  - component: {fileID: 5487817177072042732}
+  - component: {fileID: 333700170768329190}
   m_Layer: 0
   m_Name: Button
   m_TagString: Switch
@@ -55,25 +57,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1517174622046767965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3325024467115219839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d7d3f35aa744da6a75912215770230, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isActive: 0
-  interactiveBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  connectedObjects: []
-  actuators: []
-  MaxInteractCooldown: 20
 --- !u!65 &8896268497538145572
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -82,7 +65,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3325024467115219839}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.05, z: 0.4}
@@ -94,7 +77,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3325024467115219839}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
   m_Name: 
@@ -103,6 +86,56 @@ MonoBehaviour:
   m_Area: 0
   m_IgnoreFromBuild: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &-6120297108244325307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325024467115219839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8debde59d8052f8469c592a4113f4f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: 1
+  interactionCooldown: 0.5
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5487817177072042732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325024467115219839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: -6120297108244325307}
+  - {fileID: 333700170768329190}
+  syncBoxColliders: 1
+  LayerIgnore: 08000000
+--- !u!114 &333700170768329190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325024467115219839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b7d2d0b4bf1c419c5cf39f10694a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  onToggle:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4589033481714612900
 GameObject:
   m_ObjectHideFlags: 0

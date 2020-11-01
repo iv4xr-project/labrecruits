@@ -60,7 +60,13 @@ public class AgentController {
             case AgentCommandType.INTERACT:
                 AgentCommand interact = c as AgentCommand;
                 string interactWith = interact.targetId;
-                GameObject.Find(interactWith).GetComponent<Sensor>().Trigger();
+
+                GameObject interactable = GameObject.Find(interactWith);
+                if (interactable != null &&
+                    _Character.GetComponent<CharacterController>().bounds.Intersects(interactable.GetComponent<Collider>().bounds))
+                {
+                    interactable.GetComponent<Interactable>()?.Interact();
+                }
                 break;
         }
 

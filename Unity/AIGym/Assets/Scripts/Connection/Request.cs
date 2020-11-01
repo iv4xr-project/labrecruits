@@ -6,6 +6,12 @@ at Utrecht University within the Software and Game project course.
 */
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using UnityEngine;
+
+public interface IResponse {
+    string GetResponseString();
+}
 
 /// <summary>
 /// This is a concrete but generic implementation of Message.
@@ -14,8 +20,14 @@ using Newtonsoft.Json;
 /// </summary>
 /// <typeparam name="ArgumentType">This is the argument type sent from APlib.</typeparam>
 /// <typeparam name="ResponseType">This is the response type that APlib expects.</typeparam>
-public class Request<ArgumentType, ResponseType> : Message
+public class RawRequest<ArgumentType, ResponseType> : Message
 {
+    public static JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
+    {
+        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+        Converters = { new APLSyncedConverter() }
+    };
+
     public ArgumentType arg;
     public ResponseType result;
 
@@ -38,7 +50,7 @@ public class Request<ArgumentType, ResponseType> : Message
     /// Respond(disconnectRequest.WithResponse(true));
     /// </summary>
     /// <returns>The same instance of the request, but with the result set.</returns>
-    public Request<ArgumentType, ResponseType> WithResponse(ResponseType response)
+    public RawRequest<ArgumentType, ResponseType> WithResponse(ResponseType response)
     {
         SetResponse(response);
         return this;
@@ -47,19 +59,42 @@ public class Request<ArgumentType, ResponseType> : Message
     /// <summary>
     /// Execute the deserialisation within this class with the right settings.
     /// </summary>
-    public new static Request<ArgumentType, ResponseType> CreateFrom(string message) => JsonConvert.DeserializeObject<Request<ArgumentType, ResponseType>>(message, settings);
+    public new static RawRequest<ArgumentType, ResponseType> CreateFrom(string message) => JsonConvert.DeserializeObject<RawRequest<ArgumentType, ResponseType>>(message, settings);
 
     /// <summary>
     /// Execute the serialisation within this class.
     /// </summary>
-    public override string ToJson() => JsonConvert.SerializeObject(result);
+    public override string ToJson()
+    {
+        Debug.Log(result);
+        return JsonConvert.SerializeObject(result, serializerSettings);
+    }
 }
 
 /// <summary>
 /// Whenever APlib sends a null argument (this is common for a DISCONNECT for example),
 /// this class makes it possible to create a request as a Request<object, ResponseType> by simply calling Request<ResponseType>
 /// </summary>
-public class Request<ResponseType>
+public class RawRequest<ResponseType>
 {
-    public static Request<object, ResponseType> CreateFrom(string message) => Request<object, ResponseType>.CreateFrom(message);
+    public static RawRequest<object, ResponseType> CreateFrom(string message) => RawRequest<object, ResponseType>.CreateFrom(message);
 }
+
+/// <summary>
+/// Special kind of request that wraps around IAPLSerializable classes.
+/// </summary>
+/// <typeparam name="ArgumentType"></typeparam>
+/// <typeparam name="ResponseType"></typeparam>
+public class Request<ArgumentType, ResponseType> : RawRequest<ArgumentType, ResponseType> where ResponseType : IAPLSerializable
+{
+    /// <summary>
+    /// Execute the serialisation within this class.
+    /// </summary>
+    public override string ToJson() => result.APLSerialize().ToString();
+}
+
+public interface IAPLSerializable
+{
+    JObject APLSerialize();
+}
+

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3325024467115219832}
   - component: {fileID: 8896268497538145572}
   - component: {fileID: 8918444752481259597}
+  - component: {fileID: -6465784470016879561}
+  - component: {fileID: 5640328589563060273}
   m_Layer: 0
   m_Name: ColorButton
   m_TagString: Switch
@@ -79,13 +81,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597729f9b5039204ea06bc9fdf3b0fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
-  interactiveBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  connectedObjects: []
-  actuators: []
-  MaxInteractCooldown: 20
+--- !u!114 &-6465784470016879561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325024467115219839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8debde59d8052f8469c592a4113f4f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: 1
+  interactionCooldown: 0.5
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5640328589563060273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325024467115219839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: -6465784470016879561}
+  - {fileID: 8918444752481259597}
+  SyncBoxColliders: 1
+  LayerIgnore: 08000000
 --- !u!1 &4589033481714612900
 GameObject:
   m_ObjectHideFlags: 0

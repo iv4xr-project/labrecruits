@@ -20,14 +20,8 @@ public class NavMeshHelper : MonoBehaviour
     /// </summary>
     public NavMeshContainer GenerateNavMesh()
     {
-        // @Temporary, the door colliders need to be disabled for the initial generation of the navmesh
-        var doors = FindObjectsOfType<Door>();
-        EnableDoorColliders(doors, false);
-
         FindObjectOfType<World>().transform.GetComponent<NavMeshSurface>().BuildNavMesh();
         var triangulation = NavMesh.CalculateTriangulation();
-
-        EnableDoorColliders(doors, true);
 
         // Process the mesh
         mesh = MeshHelper.CleanMeshData(triangulation.vertices, triangulation.indices);
@@ -35,18 +29,11 @@ public class NavMeshHelper : MonoBehaviour
         return new NavMeshContainer(mesh.vertices, mesh.triangles);
     }
 
-    public Mesh getMesh() { return mesh; }
+    public Mesh getMesh() 
+        => mesh;
 
-    public void ClearMesh() { if (mesh != null) mesh.Clear(); }
-
-    /// <summary>
-    /// Enable or disable colliders that obstruct the navmesh
-    /// </summary>
-    private void EnableDoorColliders(Door[] doors, bool enabled)
-    {
-        foreach (var door in doors) 
-            door.transform.Find("Door").GetComponent<BoxCollider>().enabled = enabled;
-    }
+    public void ClearMesh()
+        => mesh?.Clear();
 
     /// <summary>
     /// Draws the navmesh in the scene editor
