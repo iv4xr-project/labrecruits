@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Decoration
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1627451604590373685
 Transform:
@@ -58,6 +58,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: kapstok met labjassen
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5adabdb9625374749b887473f79e2167,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5adabdb9625374749b887473f79e2167,
         type: 3}

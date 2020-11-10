@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2744794621448336056
 Transform:
@@ -90,12 +90,12 @@ GameObject:
   - component: {fileID: 2386851040380300001}
   - component: {fileID: 1423443272030476019}
   - component: {fileID: -2764712385241120629}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TablePrefab
   m_TagString: Decoration
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2386851040380300001
 Transform:

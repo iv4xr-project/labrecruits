@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6411084640976024121}
   - component: {fileID: 7648913159951928875}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TablePrefab
   m_TagString: Decoration
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ BoxCollider:
   m_GameObject: {fileID: 2590311672609437109}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.49, z: 0}
@@ -55,7 +55,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1718041901147239341}
   - component: {fileID: -1755668712821694319}
-  m_Layer: 0
+  - component: {fileID: 4534700148692730569}
+  m_Layer: 10
   m_Name: TableFlowerPrefab
   m_TagString: Decoration
   m_Icon: {fileID: 0}
@@ -93,6 +94,19 @@ MonoBehaviour:
   components: []
   syncBoxColliders: 1
   LayerIgnore: 
+--- !u!65 &4534700148692730569
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367758782725235435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.49, z: 0}
 --- !u!1 &7614269832073533555
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +198,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableFlower
       objectReference: {fileID: 0}
+    - target: {fileID: 1607633906060908406, guid: faed5f27b3de14c4095450c26d6d2467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 729074854057909992, guid: faed5f27b3de14c4095450c26d6d2467,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -239,7 +258,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1409571071862805487, guid: faed5f27b3de14c4095450c26d6d2467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898492713248928554, guid: faed5f27b3de14c4095450c26d6d2467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -174356572617712344, guid: faed5f27b3de14c4095450c26d6d2467, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: faed5f27b3de14c4095450c26d6d2467, type: 3}
 --- !u!4 &5378626485373263068 stripped
 Transform:

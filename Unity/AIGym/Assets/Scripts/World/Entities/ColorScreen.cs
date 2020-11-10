@@ -41,11 +41,11 @@ public class ColorScreen : MonoBehaviour
         else
             mix.Add(buttonID, color);
 
-        color = Color.black;
+        this.color = Color.black;
         foreach (var k in mix.Keys)
-            color += mix[k];
+            this.color += mix[k];
 
-        panelMaterial.color = color;
+        panelMaterial.color = this.color;
 
         GetComponent<APLSynced>()?.APLSync();
     }

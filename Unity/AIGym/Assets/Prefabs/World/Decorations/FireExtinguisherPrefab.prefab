@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Decoration
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5079414047487104053
 Transform:
@@ -58,6 +58,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: fireExtinguisher
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4e0dd16201487074a8cbef42602499db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -5102530947620581811, guid: 4e0dd16201487074a8cbef42602499db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5232488858435980449, guid: 4e0dd16201487074a8cbef42602499db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -2994569234417419163, guid: 4e0dd16201487074a8cbef42602499db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4e0dd16201487074a8cbef42602499db,
         type: 3}

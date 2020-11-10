@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Decoration
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &729074854057909992
 Transform:
@@ -72,6 +72,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlowerModel
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e46feda857ee4324abe0b7127dc8251c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247647214037203404, guid: e46feda857ee4324abe0b7127dc8251c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e46feda857ee4324abe0b7127dc8251c,
         type: 3}

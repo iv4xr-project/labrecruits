@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8918444752481259597}
   - component: {fileID: -6465784470016879561}
   - component: {fileID: 5640328589563060273}
+  - component: {fileID: 6771555623837970462}
   m_Layer: 0
   m_Name: ColorButton
   m_TagString: Switch
@@ -64,11 +65,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3325024467115219839}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.15, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.8, y: 0.3, z: 0.8}
+  m_Center: {x: 0, y: 0.08, z: 0}
 --- !u!114 &8918444752481259597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,8 +114,25 @@ MonoBehaviour:
   components:
   - {fileID: -6465784470016879561}
   - {fileID: 8918444752481259597}
-  SyncBoxColliders: 1
+  - {fileID: 6771555623837970462}
+  syncBoxColliders: 1
   LayerIgnore: 08000000
+--- !u!114 &6771555623837970462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325024467115219839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b7d2d0b4bf1c419c5cf39f10694a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  onToggle:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4589033481714612900
 GameObject:
   m_ObjectHideFlags: 0

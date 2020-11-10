@@ -115,7 +115,8 @@ public class Observation : IAPLSerializable
 
         for (int i = 0; i < b.Length; i++) {
             var o = b[i].GetComponent<Collider>();
-            if (o.enabled && (o.transform.position - eyePosition).sqrMagnitude <= viewDistanceSqr)
+            // WP: adding a guard o != null if b[i] turns out not to be a collider
+            if (o!= null && o.enabled && (o.transform.position - eyePosition).sqrMagnitude <= viewDistanceSqr)
                 colliders.Add(o.bounds);
         }
 
@@ -139,7 +140,7 @@ public class Observation : IAPLSerializable
 
             // Get relevant APLSynced scripts
             var synced = new List<APLSynced>();
-            o.GetComponentsInParent(false, synced);
+            o.GetComponentsInParent(false, synced); 
             o.GetComponentsInChildren(false, synced);
             objects.UnionWith(synced);
         }
@@ -163,7 +164,11 @@ public class Observation : IAPLSerializable
         {
             GameObject otherObject = Utils.GetFirstObjectWithTag(hit.collider.gameObject);
 
-            if (otherObject.tag == "Player")                      return true;  // Player can see object
+            if (otherObject.tag == "Player" && otherObject.name == "Agent " + agent.id)
+            {
+                Debug.Log(">>> obj-name:" + otherObject.name + ", agent.id: " + agent.id);
+                return true;  // Player can see object
+            }
             if (otherObject.GetInstanceID() != o.GetInstanceID()) return false; // Vision is blocked by another object
         }
 

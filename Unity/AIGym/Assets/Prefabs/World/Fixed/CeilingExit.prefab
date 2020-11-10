@@ -136,6 +136,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exitbord
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 222df8c1ec96418428d926c891af2c0a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -8052994932809076077, guid: 222df8c1ec96418428d926c891af2c0a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101430577481724397, guid: 222df8c1ec96418428d926c891af2c0a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -8626751840527039810, guid: 222df8c1ec96418428d926c891af2c0a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -4214470490016819149, guid: 222df8c1ec96418428d926c891af2c0a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 222df8c1ec96418428d926c891af2c0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -205,6 +230,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -6581041025168474491, guid: 222df8c1ec96418428d926c891af2c0a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292535884062368016, guid: 222df8c1ec96418428d926c891af2c0a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 222df8c1ec96418428d926c891af2c0a, type: 3}

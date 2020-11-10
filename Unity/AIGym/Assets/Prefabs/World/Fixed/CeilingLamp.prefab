@@ -136,6 +136,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CeilingLamp
       objectReference: {fileID: 0}
+    - target: {fileID: 5678589098642244023, guid: 2fe16c7433c19834c881c79622dfe6be,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 9106106911423509544, guid: 2fe16c7433c19834c881c79622dfe6be,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -195,6 +200,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.041
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637256101854713488, guid: 2fe16c7433c19834c881c79622dfe6be,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472756352579588971, guid: 2fe16c7433c19834c881c79622dfe6be,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7505652207116729805, guid: 2fe16c7433c19834c881c79622dfe6be,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234490560973057254, guid: 2fe16c7433c19834c881c79622dfe6be,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2335019394052431894, guid: 2fe16c7433c19834c881c79622dfe6be, type: 3}

@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1865631622579304878
 Transform:
@@ -136,6 +136,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireExtinguisherPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8812131297614216295, guid: 14faff5694746e248ab7bd2c7f088cc8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5079414047487104053, guid: 14faff5694746e248ab7bd2c7f088cc8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -190,6 +195,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040425251275526121, guid: 14faff5694746e248ab7bd2c7f088cc8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215620627615701165, guid: 14faff5694746e248ab7bd2c7f088cc8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108444835407522437, guid: 14faff5694746e248ab7bd2c7f088cc8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 265180941838752321, guid: 14faff5694746e248ab7bd2c7f088cc8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14faff5694746e248ab7bd2c7f088cc8, type: 3}

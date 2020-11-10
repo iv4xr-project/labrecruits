@@ -66,19 +66,28 @@ public class WireBuilder : MonoBehaviour
             GameObject part = Instantiate(wirePrefab, Vector3.Lerp(s, e, cable / length), Quaternion.Euler(90,-90,0), newWire.transform);
             part.transform.localScale = new Vector3(radius, stepLength/2, radius);
             part.name = "CablePart " + cable;
+            var partRB = part.GetComponent<Rigidbody>();
 
             if (wireParts.Count > 0)
             {
-                var oldPart = wireParts[wireParts.Count - 1].GetComponent<HingeJoint>();
-                oldPart.connectedBody = part.GetComponent<Rigidbody>();
-                part.GetComponent<Rigidbody>().isKinematic = false;
+                var oldPart = wireParts[wireParts.Count - 1];
+                var oldHinge = oldPart.GetComponent<HingeJoint>();
+
+                // Apply physics
+                if (oldHinge && partRB)
+                {
+                    oldHinge.connectedBody = partRB;
+                    partRB.isKinematic = false;
+                }
+
                 oldPart.transform.localRotation =
                     Quaternion.LookRotation(part.transform.position - oldPart.transform.position, Vector3.up);
                 oldPart.transform.Rotate(new Vector3(-90,0,0));
             }
             else
             {
-                part.GetComponent<Rigidbody>().isKinematic = true;
+                if (partRB)
+                    partRB.isKinematic = true;
             }
             
             wireParts.Add(part);
@@ -88,18 +97,23 @@ public class WireBuilder : MonoBehaviour
         //Remove last HingeJoint when we have more than one wire part.
         if (wireParts.Count > 1)
         {
-            var last2 = wireParts[wireParts.Count - 2].GetComponent<HingeJoint>();
-            var last = wireParts[wireParts.Count - 1].GetComponent<HingeJoint>();
-        
-            last.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            var last2 = wireParts[wireParts.Count - 2]; //.GetComponent<HingeJoint>();
+            var last = wireParts[wireParts.Count - 1]; //.GetComponent<HingeJoint>();
+
+            var lastRB = last.GetComponent<Rigidbody>();
+            if (lastRB)
+                lastRB.isKinematic = true;
+
             last.transform.localRotation =
                 Quaternion.LookRotation(last.transform.position - last2.transform.position, Vector3.up);
             last.transform.Rotate(new Vector3(-90,0,0));
             Destroy(last);
         }
-        
+
         //Lit the wire when we have at least one wire part.
-        if (wireParts.Count > 0)
+
+        bool AnimateWires = false;
+        if (wireParts.Count > 0 && AnimateWires)
         {
             litTime = flowTime / wireParts.Count;
             for (int i = 0; i < wireParts.Count; i++)

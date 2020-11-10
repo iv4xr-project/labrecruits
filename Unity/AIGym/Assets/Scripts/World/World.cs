@@ -260,6 +260,7 @@ public class World : MonoBehaviour
             var cells = rows[j].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             string linkID = cells[0];
+            //Debug.Log(">>> " + linkID);
 
             GameObject link = GameObject.Find(linkID);
 
@@ -269,8 +270,22 @@ public class World : MonoBehaviour
                 continue;
             }
 
-            if (cells.Length == 0)
-                UserErrorInfo.ErrorWriter.AddMessage($"The sensor '{linkID}' does not have any objects connected to it. Line: {j}");
+            // WP: adding this logic for the link/switch. When the switch is interacted-to (when the event
+            // onIteract is invoked), this logic will cause its state to be toggled.
+            // Note that in this this will fire the switch's onToggle event.
+            if(link.GetComponent<Interactable>() && link.GetComponent<Toggleable>())
+            {
+                link.GetComponent<Interactable>().onInteract?.AddListener(_ => link.GetComponent<Toggleable>().ToggleState());
+            }
+            else
+            {
+                UserErrorInfo.ErrorWriter.AddMessage($"Something is wrong with '{linkID}': it has no Interactable or no Toggable component. Line: {j}");
+                continue;
+            }
+
+            // this cannot be the case, since cells[0] exists:
+            // if (cells.Length == 0)
+            //    UserErrorInfo.ErrorWriter.AddMessage($"The sensor '{linkID}' does not have any objects connected to it. Line: {j}");
 
             for (var i = 1; i < cells.Length; i++)
             {
@@ -288,15 +303,24 @@ public class World : MonoBehaviour
 
                     if (!broken)
                     {
-                        // Handle buttons
+                        // Add the door logic. When the link/switch is interacted to (so, in turn the switch will
+                        // fire onTogle event), we will also toggle this door (which connected to the switch):
                         if (connector?.GetComponent<Toggleable>())
-                            link.GetComponent<Interactable>()?.onInteract?.AddListener(_ => connector.GetComponent<Toggleable>().ToggleState());
+                            link.GetComponent<Toggleable>()?.onToggle?.AddListener(_ => connector.GetComponent<Toggleable>().ToggleState());
+                        //if (connector?.GetComponent<Toggleable>())
+                        //    link.GetComponent<Interactable>()?.onInteract?.AddListener(_ => connector.GetComponent<Toggleable>().ToggleState());
 
                         if (connector?.GetComponent<ColorScreen>())
                             link.GetComponent<Interactable>()?.onInteract?.AddListener(connector.GetComponent<ColorScreen>().UpdateScreen);
 
                         // Handle switches
-                        link.GetComponent<Toggleable>()?.onToggle.AddListener(connector.GetComponent<Toggleable>().SetState);
+                        // WP: not sure if this is needed. I don't think the link/switch will ever receive
+                        // an onToggle(s) event, unless it has been made listener of another switch.
+                        // In this case, when the other switch is interacted, it will auto-trigger an
+                        // onToggle(s) event, where s is the state of the switch. This logic below would
+                        // then propagates the effect to all doors connected to the link.
+                        // But so far we don't actually have a switch connected to anorther switch...
+                        //link.GetComponent<Toggleable>()?.onToggle.AddListener(connector.GetComponent<Toggleable>().SetState);
                     }
 
                     GameObject wire = _wireBuilder.CreateWire(link.transform, connector.transform, 0.125f, 0.25f, broken);
