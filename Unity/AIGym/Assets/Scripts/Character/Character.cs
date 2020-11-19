@@ -117,41 +117,45 @@ public class Character : MonoBehaviour
 
                 _moveDirection = new Vector3(diff.x, 0, diff.z).normalized;
 
-
-                #region whiskers:
-                World world = FindObjectOfType<World>().GetComponent<World>();
-
-                float hazardRadius = 0.2f;
-                float charRadius = 0.3f;
-                float whiskersLength = 2f;
-                float deathDist = hazardRadius + charRadius;
-                float preferredDist = deathDist + whiskersLength;
-
-                foreach (FireHazard hazard in world.GetHazards())
+                bool enableFireAvoidance = false;
+                // disabling the fire-avoidance below, as it conflicts with the way java-agent wants to
+                // cobntrol
+                if(enableFireAvoidance)
                 {
-                    Vector3 hazDiff = hazard.transform.position - transform.position;
+                    #region whiskers:
+                    World world = FindObjectOfType<World>().GetComponent<World>();
 
-                    if (hazDiff.magnitude < preferredDist)
+                    float hazardRadius = 0.2f;
+                    float charRadius = 0.3f;
+                    float whiskersLength = 2f;
+                    float deathDist = hazardRadius + charRadius;
+                    float preferredDist = deathDist + whiskersLength;
+
+                    foreach (FireHazard hazard in world.GetHazards())
                     {
-                        Vector3 normalizedRunDirection = (-hazDiff).normalized;
+                        Vector3 hazDiff = hazard.transform.position - transform.position;
 
-                        float runMultiplier = 1f;
-                        float clampDist = hazDiff.magnitude - deathDist;
-                        runMultiplier /= Math.Max(clampDist * clampDist, 0.04f);
+                        if (hazDiff.magnitude < preferredDist)
+                        {
+                            Vector3 normalizedRunDirection = (-hazDiff).normalized;
 
-                        _moveDirection.x += normalizedRunDirection.x * runMultiplier;
-                        _moveDirection.z += normalizedRunDirection.z * runMultiplier;
+                            float runMultiplier = 1f;
+                            float clampDist = hazDiff.magnitude - deathDist;
+                            runMultiplier /= Math.Max(clampDist * clampDist, 0.04f);
 
-                        Vector3 circleAround = Quaternion.AngleAxis(circleLeft ? 90 : -90, Vector3.up) * normalizedRunDirection;
+                            _moveDirection.x += normalizedRunDirection.x * runMultiplier;
+                            _moveDirection.z += normalizedRunDirection.z * runMultiplier;
 
-                        circleAround *= runMultiplier;
+                            Vector3 circleAround = Quaternion.AngleAxis(circleLeft ? 90 : -90, Vector3.up) * normalizedRunDirection;
 
-                        _moveDirection.x += circleAround.x;
-                        _moveDirection.z += circleAround.z;
+                            circleAround *= runMultiplier;
+
+                            _moveDirection.x += circleAround.x;
+                            _moveDirection.z += circleAround.z;
+                        }
                     }
+                    #endregion
                 }
-                #endregion
-
                 if (_moveDirection.x != 0 || _moveDirection.z != 0)
                     model.rotation = Quaternion.Slerp(model.rotation, Quaternion.LookRotation(_moveDirection, Vector3.up), 10f * Time.deltaTime);
             }

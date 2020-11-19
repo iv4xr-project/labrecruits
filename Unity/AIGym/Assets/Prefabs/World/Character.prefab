@@ -224,8 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentID: 0
   vGravity: 0.01
-  eyeHeight: 1.2
-  relativeEyePosition: {x: 0, y: 0, z: 0}
+  eyeHeight: 1.7
+  relativeEyePosition: {x: 0, y: 0.7, z: 0}
   wasMoving: 0
   _moveDirection: {x: 0, y: 0, z: 0}
   maxHealth: 100

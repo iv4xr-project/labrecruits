@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8488650946985979043}
   - component: {fileID: 8488650946985979042}
   - component: {fileID: -6744309324173667927}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: WirePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -42,7 +42,7 @@ public class NavMeshHelper : MonoBehaviour
     {
         if (mesh == null || mesh.vertices.Length == 0) return;
 
-        Gizmos.color = new Color(0.44f, 0.96f, 0.99f, 0.1f); //@Todo, create some static debug colors
+        Gizmos.color = new Color(0.8f, 0f, 0f, 1f); //@Todo, create some static debug colors
         Gizmos.DrawWireMesh(mesh);
     }
 }
