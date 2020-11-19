@@ -10,6 +10,8 @@ For more information check the wiki.
 
 The project was developed for Unity 2019.2.6f1
 
+To build: open the project in Unity. From there, there should be a menu item to build the executable.
+
 
 #### Contributors
 
