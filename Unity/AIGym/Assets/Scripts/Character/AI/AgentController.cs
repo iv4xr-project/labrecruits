@@ -65,7 +65,7 @@ public class AgentController {
                 if (interactable != null &&
                     _Character.GetComponent<CharacterController>().bounds.Intersects(interactable.GetComponent<Collider>().bounds))
                 {
-                    interactable.GetComponent<Interactable>()?.Interact();
+                    interactable.GetComponent<Interactable>()?.Interact(_Character);
                 }
                 break;
         }

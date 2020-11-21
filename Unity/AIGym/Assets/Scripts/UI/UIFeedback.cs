@@ -16,7 +16,7 @@ public class UIFeedback : MonoBehaviour
     public Text idField,
                 posXField, posYField, posZField,
                 rotXField, rotYField, rotZField,
-                healthField, moodField;
+                healthField, moodField, scoreField ;
 
     void Update()
     {
@@ -59,5 +59,6 @@ public class UIFeedback : MonoBehaviour
 
         healthField.text = activeCharacter.Health.ToString();
         moodField.text = activeCharacter.GetMood().value;
+        scoreField.text = activeCharacter.Score.ToString() ;
     }
 }

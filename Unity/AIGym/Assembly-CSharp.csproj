@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BE5644A5-71C6-8DB6-FC33-42C69A0986D9}</ProjectGuid>
+    <ProjectGuid>{8BE7BB26-5B91-F682-7DD6-CE643D78F392}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Scripts</AssemblyName>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -63,69 +63,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Character\AI\AgentCommand.cs" />
-    <Compile Include="Assets\Scripts\Character\AI\AgentController.cs" />
-    <Compile Include="Assets\Scripts\Character\AI\Entity.cs" />
-    <Compile Include="Assets\Scripts\Character\AI\Observation.cs" />
-    <Compile Include="Assets\Scripts\Character\AI\ScreenshotObservation.cs" />
-    <Compile Include="Assets\Scripts\Character\CameraBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Character\Character.cs" />
-    <Compile Include="Assets\Scripts\Character\FirstPersonCameraBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Character\MoodBubble.cs" />
-    <Compile Include="Assets\Scripts\Character\NPC\NPC.cs" />
-    <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Character\ThirdPersonCameraBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Connection\APLSynced.cs" />
-    <Compile Include="Assets\Scripts\Connection\Dispatcher.cs" />
-    <Compile Include="Assets\Scripts\Connection\JsonConverters.cs" />
-    <Compile Include="Assets\Scripts\Connection\Message.cs" />
-    <Compile Include="Assets\Scripts\Connection\Request.cs" />
-    <Compile Include="Assets\Scripts\Connection\SocketEvents.cs" />
-    <Compile Include="Assets\Scripts\Connection\SocketServer.cs" />
-    <Compile Include="Assets\Scripts\Connection\ThreadSafeUnityEvent.cs" />
-    <Compile Include="Assets\Scripts\Lab.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\UI\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
-    <Compile Include="Assets\Scripts\UI\StandaloneFileBrowser\StandaloneFileBrowser.cs" />
-    <Compile Include="Assets\Scripts\UI\StandaloneFileBrowser\StandaloneFileBrowserEditor.cs" />
-    <Compile Include="Assets\Scripts\UI\StandaloneFileBrowser\StandaloneFileBrowserLinux.cs" />
-    <Compile Include="Assets\Scripts\UI\StandaloneFileBrowser\StandaloneFileBrowserMac.cs" />
-    <Compile Include="Assets\Scripts\UI\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
-    <Compile Include="Assets\Scripts\UI\UIConnectionBehaviour.cs" />
-    <Compile Include="Assets\Scripts\UI\UIFeedback.cs" />
-    <Compile Include="Assets\Scripts\UI\UIFileSelect.cs" />
-    <Compile Include="Assets\Scripts\UI\UIHoverBehaviour.cs" />
-    <Compile Include="Assets\Scripts\UI\UILoggerBehaviour.cs" />
-    <Compile Include="Assets\Scripts\UI\UIPopup.cs" />
-    <Compile Include="Assets\Scripts\UI\UIToggleBehaviour.cs" />
-    <Compile Include="Assets\Scripts\UI\UIViewBehaviour.cs" />
-    <Compile Include="Assets\Scripts\UI\UserErrorInfo.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Constants.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Delayer.cs" />
-    <Compile Include="Assets\Scripts\Utilities\LookAtCamera.cs" />
-    <Compile Include="Assets\Scripts\Utilities\MeshHelper.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Tuple.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Utils.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\Colorized.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\ColorScreen.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\Hazards\FireHazard.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\Hazards\Hazard.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\Hazards\NPCHazard.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\Interactable.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\Scoring.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\Toggleable.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\Wire.cs" />
-    <Compile Include="Assets\Scripts\World\Entities\WireBuilder.cs" />
-    <Compile Include="Assets\Scripts\World\EnvironmentConfig.cs" />
-    <Compile Include="Assets\Scripts\World\NavMeshContainer.cs" />
-    <Compile Include="Assets\Scripts\World\NavMeshHelper.cs" />
-    <Compile Include="Assets\Scripts\World\World.cs" />
-    <None Include="Assets\Scripts\Scripts.asmdef" />
-    <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    <Compile Include="Assets\NewBehaviourScript.cs" />
+    <None Include="Assets\Models\Procedural fire\Shaders\FireSphere.shader" />
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2019.2.6f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -303,18 +271,6 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>/Applications/Unity/Hub/Editor/2019.2.6f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.VR">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.2.6f1/Unity.app/Contents/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Graphs">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.2.6f1/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.OSXStandalone.Extensions">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.2.6f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Assets/Plugins/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
@@ -681,6 +637,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Scripts.csproj">
+      <Project>{BE5644A5-71C6-8DB6-FC33-42C69A0986D9}</Project>
+      <Name>Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{355B0457-B280-4523-4EF0-8AC7C73F14A6}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="NavMeshComponents.csproj">
       <Project>{EB7F6E02-012F-7181-891C-2994EB03B256}</Project>
       <Name>NavMeshComponents</Name>

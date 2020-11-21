@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6120297108244325307}
   - component: {fileID: 5487817177072042732}
   - component: {fileID: 333700170768329190}
+  - component: {fileID: -8929362347648409835}
   m_Layer: 0
   m_Name: Button
   m_TagString: Switch
@@ -136,6 +137,18 @@ MonoBehaviour:
   onToggle:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-8929362347648409835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325024467115219839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d704f203f2177431fa9ca1ef9df3f8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4589033481714612900
 GameObject:
   m_ObjectHideFlags: 0

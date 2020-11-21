@@ -26,7 +26,7 @@ public class Interactable : MonoBehaviour
     /// <summary>
     /// Player based interaction.
     /// </summary>
-    public void Interact()
+    public void Interact(Character whoDidIt)
     {
         if (interactable && timeSinceInteraction > interactionCooldown)
         {
@@ -38,6 +38,10 @@ public class Interactable : MonoBehaviour
 
             // Let Unity's event system handle the rest.
             onInteract?.Invoke(gameObject);
+
+            // See if this interaction leads to points
+            // Debug.Log(">>> found a Scoring-component: " + GetComponent<Scoring>());
+            GetComponent<Scoring>()?.InteractionBonus(whoDidIt);
 
             GetComponent<APLSynced>()?.APLSync();
         }

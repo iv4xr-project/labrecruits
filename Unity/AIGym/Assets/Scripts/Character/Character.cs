@@ -43,6 +43,10 @@ public class Character : MonoBehaviour
     private bool circleLeft = false;
     private Mood _mood;
     private int _health;
+    private int _score = 0 ;
+
+    private HashSet<string> _visitedPointWorthObjects = new HashSet<string>();
+    private HashSet<string> _turnedOnSwitches = new HashSet<string>();
 
     public Color debugColor;
 
@@ -71,6 +75,15 @@ public class Character : MonoBehaviour
             _health = value;
             if (_health <= 0)
                 UserErrorInfo.ErrorWriter.AddMessage($"Agent {agentID} has died.", true, ErrorType.General);
+        }
+    }
+
+    public int Score
+    {
+        get { return _score;  }
+        set
+        {
+            _score = value;
         }
     }
 
@@ -244,7 +257,7 @@ public class Character : MonoBehaviour
             var sensor = @switch.GetComponent<Interactable>();
             if (!sensor.interactable || Vector3.Distance(sensor.transform.position, this.transform.position) > 0.5) continue;
             Debug.Log($"Interacting with: {sensor.name}, distance {Vector3.Distance(sensor.transform.position, this.transform.position)}");
-            sensor.Interact();
+            sensor.Interact(this);
             return;
         }
         
@@ -265,6 +278,36 @@ public class Character : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public Mood GetMood() => _mood;
+
+    /*
+     * Check if the game-object with the given name (assumed unique) has been visited by this
+     * character.
+     */ 
+    public bool hasBeenVisited(string gameObjectName)
+    {
+        return _visitedPointWorthObjects.Contains(gameObjectName) ;
+    }
+
+    /*
+     * Check if the switch with the specified name has received score-bonus for being turned-on. This bonus
+     * can only be received once.
+     */ 
+    public bool hasReceivedTurnedOnBonus(string switchName)
+    {
+        return _turnedOnSwitches.Contains(switchName);
+    }
+
+    public void registerVisitedGameObject(string gobjName)
+    {
+        //Debug.Log(">>> " + gobjName + " registered: " + hasBeenVisited(gobjName)) ;
+        _visitedPointWorthObjects.Add(gobjName);
+        //Debug.Log(">>> " + gobjName + " registered: " + hasBeenVisited(gobjName)) ;
+    }
+
+    public void registerVisitedTurnedOnSwitch(string switchName)
+    {
+        _turnedOnSwitches.Add(switchName);
+    }
 
     /// <summary>
     /// These methods should not be included in the binary

@@ -22,6 +22,8 @@ public struct SerializedAgent
     public Vector3 velocity;
     public bool didNothing;
     public int health;
+    public int score;
+    public string mood;
 }
 
 public struct SerializedMeta
@@ -56,6 +58,8 @@ public class Observation : IAPLSerializable
         agent.position = character.transform.position;
         agent.didNothing = usedAction == AgentCommandType.DONOTHING;
         agent.health = character.Health;
+        agent.score = character.Score;
+        agent.mood = character.GetMood().value;
         
         AddAllVisibleObjects(character);
 
