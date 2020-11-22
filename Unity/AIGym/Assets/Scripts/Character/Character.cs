@@ -255,7 +255,10 @@ public class Character : MonoBehaviour
         foreach (GameObject @switch in switches)
         {
             var sensor = @switch.GetComponent<Interactable>();
-            if (!sensor.interactable || Vector3.Distance(sensor.transform.position, this.transform.position) > 0.5) continue;
+            // giving a bit larger interaction raduis when played by actual player, for convenience
+            if (!sensor.interactable
+                || Vector3.Distance(sensor.transform.position, this.transform.position) > 0.9)
+                continue;
             Debug.Log($"Interacting with: {sensor.name}, distance {Vector3.Distance(sensor.transform.position, this.transform.position)}");
             sensor.Interact(this);
             return;

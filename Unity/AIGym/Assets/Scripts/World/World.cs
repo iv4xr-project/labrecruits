@@ -93,6 +93,8 @@ public class World : MonoBehaviour
         NPC.walkingSpeed = config.npc_speed;
 
         FireHazard.SPREAD_SPEED = config.fire_spread;
+        // setting the light intensity here
+        RenderSettings.ambientIntensity = config.light_intensity;
     }
 
     private void BuildLevel(string path)

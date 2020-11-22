@@ -25,7 +25,13 @@ public class Scoring : MonoBehaviour
             {
                 int scoreGained = 10; // first time visiting a turned-on door --> bonus!
                 whoDidIt.registerVisitedTurnedOnSwitch(oname);
-                whoDidIt.SetMood("Hmm...");
+                string[] moods =
+                    {
+                       "Hmm...",
+                       "What was that?",
+                       "Snap!"
+                    };
+                whoDidIt.SetMood(moods[Random.Range(0, moods.Length)]);
                 whoDidIt.Score += scoreGained;
             }
         }
