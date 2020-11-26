@@ -61,11 +61,20 @@ public class AgentController {
                 AgentCommand interact = c as AgentCommand;
                 string interactWith = interact.targetId;
 
+                // only interact if: (1) the target can be interacted to, and (2) the character is
+                // within the target colliding's bound:
                 GameObject interactable = GameObject.Find(interactWith);
-                if (interactable != null &&
-                    _Character.GetComponent<CharacterController>().bounds.Intersects(interactable.GetComponent<Collider>().bounds))
+                if (interactable != null)
                 {
-                    interactable.GetComponent<Interactable>()?.Interact(_Character);
+                    // some game-objects like doors may have their collider(s) burried in a
+                    // sub-component, so we should perhaps traverse the sub-components too.
+                    // But since right now only switches can be interacted, and they have
+                    // their collider at the top, we will just do this for now:
+                    Collider targetCollider = interactable.GetComponent<Collider>();
+                    if (targetCollider != null && _Character.GetComponent<CharacterController>().bounds.Intersects(targetCollider.bounds))
+                    {
+                        interactable.GetComponent<Interactable>()?.Interact(_Character);
+                    }
                 }
                 break;
         }
