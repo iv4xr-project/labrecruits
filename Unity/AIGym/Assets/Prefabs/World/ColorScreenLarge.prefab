@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4535433597858593308}
   - component: {fileID: 8798664430426014709}
   - component: {fileID: 1213159172670257}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 8094283472957897160}
   - component: {fileID: 3687335297629291155}
   - component: {fileID: 5198829069932559995}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 961951859033954574}
   - component: {fileID: 9139453971225936202}
   - component: {fileID: 8630985548852661246}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ColorScreenLarge
   m_TagString: ColorScreen
   m_Icon: {fileID: 0}
@@ -214,8 +214,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.3999999, z: 0.05}
-  m_Center: {x: 0, y: 1.4, z: 0.05}
+  m_Size: {x: 2.2, y: 2.2, z: 0.4}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &8630985548852661246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,4 +230,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: 961951859033954574}
-  SyncBoxColliders: 1
+  syncBoxColliders: 1
+  LayerIgnore: 

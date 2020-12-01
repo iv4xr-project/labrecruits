@@ -87,10 +87,17 @@ public class Observation : IAPLSerializable
             v.y += Constants.epsilon;
             Vector3 diff = v - eyePosition;
 
+            //Debug.Log(">>> vertex: " + v);
+
             if (diff.sqrMagnitude >= character.viewDistanceSqr)     continue; // If the vertex is outside the character's vision radius
-            if (colliders.Any(c => c.Contains(v)))                  continue; // If the vertex is covered by any collider
-            if (Physics.Raycast(eyePosition, diff, diff.magnitude, (1 << 9) | (1 << 10))) continue; // If the vertex is behind another object
-            
+            // If the vertex is covered by a collider (door or colorscreen), it is not visible.
+            // By "covered" it means if e.g. it is inside/engulfed by a collider, so a agent can't possibly
+            // move to it anyway:
+            if (colliders.Any(c => c.Contains(v)))                  continue; 
+            // If the vertex is behind a wall/floor/wall/door, it is not visible:
+            if (Physics.Raycast(eyePosition, diff, diff.magnitude, (1 << 9) | (1 << 10) | (1 << 11))) continue; 
+
+            //Debug.Log(">>> " + v + " is visible");
             visibleVertexIndices.Add(i);
         }
 
@@ -98,15 +105,26 @@ public class Observation : IAPLSerializable
     }
 
     /// <summary>
-    /// Return the bounds of nearby Colliders 
+    /// Return the bounds of nearby Colliders, for the purpose of identifying 
+    /// navigation nodes which are not covered (being inside) by these colliders.
     /// </summary>
     /// <param name="eyePosition">The position of the character</param>
     /// <param name="viewDistanceSqr">The squared distance the character can see</param>
     /// <returns>A list of colliders that are in range</returns>
     private List<Bounds> GetNearbyBoundsColliders(Vector3 eyePosition, float viewDistanceSqr) {
+
+        // Note first that we can ignore walls and floors for this calculation because the nav-mesh
+        // is generated as such that they won't be covered by floors and walls.
+        // Also note that we have marked "Decorations" objects as "wall".
+
+        // Current there are only two types of game objects that can cover/engulf a nav-node,
+        // namely: door and colorscreen. Note that an open-door might by chance cover a nav-node
+        // that is directly underneath it.
+
         // @Incomplete, compute these references once. Also, maybe there is a better way to capture all Colliders that can block parts of the navmesh.
-        //var a = GameObject.FindObjectsOfType<Door>();
-        var b = GameObject.FindGameObjectsWithTag("Dynamic").Union(GameObject.FindGameObjectsWithTag("Decoration")).ToArray();
+        // var a = GameObject.FindObjectsOfType<Door>();
+        // var b = GameObject.FindGameObjectsWithTag("Dynamic").Union(GameObject.FindGameObjectsWithTag("Decoration")).ToArray();
+        var b = GameObject.FindGameObjectsWithTag("Door").Union(GameObject.FindGameObjectsWithTag("ColorScreen")).ToArray();
 
         var colliders = new List<Bounds>();
 #warning TODO: Fix door collider observation:
