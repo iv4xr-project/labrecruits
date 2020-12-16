@@ -233,6 +233,14 @@ public class World : MonoBehaviour
             instance.GetComponent<Colorized>().SetColor(Utils.colorFromHexString(color[1]));
         }
 
+        // Linking the Toggable and Interactable behavior-"aspects" of buttons to each other.
+        // When the switch is interacted-to (when the event onIteract is invoked), this logic will cause its state to be toggled.
+        // Note that in this this will fire the switch's onToggle event.
+        if (tile == "b" || tile == "cb")
+        {
+            instance.GetComponent<Interactable>().onInteract?.AddListener(_ => instance.GetComponent<Toggleable>().ToggleState());
+        }
+        
         if (orientation.Length > 1)
             RotateObject(instance, orientation[1]);
 
@@ -272,9 +280,11 @@ public class World : MonoBehaviour
                 continue;
             }
 
+            // This logic is MOVED to the method PlaceObject
             // WP: adding this logic for the link/switch. When the switch is interacted-to (when the event
             // onIteract is invoked), this logic will cause its state to be toggled.
             // Note that in this this will fire the switch's onToggle event.
+            /*
             if(link.GetComponent<Interactable>() && link.GetComponent<Toggleable>())
             {
                 link.GetComponent<Interactable>().onInteract?.AddListener(_ => link.GetComponent<Toggleable>().ToggleState());
@@ -284,6 +294,7 @@ public class World : MonoBehaviour
                 UserErrorInfo.ErrorWriter.AddMessage($"Something is wrong with '{linkID}': it has no Interactable or no Toggable component. Line: {j}");
                 continue;
             }
+            */
 
             // this cannot be the case, since cells[0] exists:
             // if (cells.Length == 0)

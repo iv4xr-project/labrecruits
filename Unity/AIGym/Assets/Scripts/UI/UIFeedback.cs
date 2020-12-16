@@ -47,16 +47,17 @@ public class UIFeedback : MonoBehaviour
     void SetInspectorFields()
     {
         Vector3 position = activeCharacter._transform.localPosition;
-        Vector3 rotation = activeCharacter._transform.localRotation.eulerAngles;
+        Vector3 rotation = activeCharacter._transform.localEulerAngles;
 
         posXField.text = TruncateFloat(position.x).ToString();
         posYField.text = TruncateFloat(position.y).ToString();
         posZField.text = TruncateFloat(position.z).ToString();
 
         rotXField.text = TruncateFloat(rotation.x).ToString();
+        rotXField.text = "haha";
         rotYField.text = TruncateFloat(rotation.y).ToString();
         rotZField.text = TruncateFloat(rotation.z).ToString();
-
+        rotZField.text = "Z";
         healthField.text = activeCharacter.Health.ToString();
         moodField.text = activeCharacter.GetMood().value;
         scoreField.text = activeCharacter.Score.ToString() ;

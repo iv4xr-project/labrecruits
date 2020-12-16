@@ -65,6 +65,8 @@ public class Character : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
 
         relativeEyePosition = GetComponentInChildren<Camera>().transform.position - _transform.position;
+
+        //GetComponent<Renderer>().material.SetColor("Pink", new Color(1, 1, 0));
     }
 
     public int Health
