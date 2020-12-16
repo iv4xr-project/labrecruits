@@ -280,7 +280,7 @@ public class World : MonoBehaviour
                 continue;
             }
 
-            // This logic is MOVED to the method PlaceObject
+            // This logic is MOVED to the method PlaceObject, as it is more appropriate to be put there.
             // WP: adding this logic for the link/switch. When the switch is interacted-to (when the event
             // onIteract is invoked), this logic will cause its state to be toggled.
             // Note that in this this will fire the switch's onToggle event.
@@ -311,7 +311,11 @@ public class World : MonoBehaviour
                 }
                 if (link.GetComponent<Interactable>())
                 {
+                    // if link is a button, this is the logic to connect it to doors:
+
+
                     //TODO Apply pseudo-random seed
+                    // Logic to randomly break button connections ... for now this is not done (wireBreaking is always false).
                     bool broken = wireBreaking && Random.Range(0, 2) == 0;
 
                     if (!broken)
@@ -341,7 +345,11 @@ public class World : MonoBehaviour
                 }
 
                 if (link.GetComponent<NPC>())
+                {
+                    // the logic to add NPC walk:
                     link.GetComponent<NPC>().points.Add(connector.transform.position);
+                }
+                    
             }
         }
     }
