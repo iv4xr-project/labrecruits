@@ -15,7 +15,7 @@ public class UIFeedback : MonoBehaviour
     //Variables that hold the text fields that have to be assigned
     public Text idField,
                 posXField, posYField, posZField,
-                rotXField, rotYField, rotZField,
+                //rotXField, rotYField, rotZField,  disabled... 
                 healthField, moodField, scoreField ;
 
     void Update()
@@ -53,11 +53,13 @@ public class UIFeedback : MonoBehaviour
         posYField.text = TruncateFloat(position.y).ToString();
         posZField.text = TruncateFloat(position.z).ToString();
 
+        // rotation feedback is disabled. Only the y-angle will change. And the
+        // agent control from Java ignore rotation anyway
+        /*
         rotXField.text = TruncateFloat(rotation.x).ToString();
-        rotXField.text = "haha";
         rotYField.text = TruncateFloat(rotation.y).ToString();
         rotZField.text = TruncateFloat(rotation.z).ToString();
-        rotZField.text = "Z";
+        */
         healthField.text = activeCharacter.Health.ToString();
         moodField.text = activeCharacter.GetMood().value;
         scoreField.text = activeCharacter.Score.ToString() ;

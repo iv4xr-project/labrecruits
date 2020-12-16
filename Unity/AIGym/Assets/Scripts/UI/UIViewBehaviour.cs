@@ -43,8 +43,9 @@ public class UIViewBehaviour : MonoBehaviour
         UIToggleBehaviour toggleBehaviour = toggle.GetComponent<UIToggleBehaviour>();
         toggleBehaviour.cameraBehaviour = gameController.GetComponent<CameraBehaviour>();
         toggleBehaviour.character = agent.GetComponent<Character>();
-        toggle.GetComponentInChildren<Text>().text = agent.name;
-
+        Text txt = toggle.GetComponentInChildren<Text>();
+        txt.text = agent.name;
+        // txt.fontSize = 24;
         // Keep track of the newly created UI instance
         agents.Add(agent, toggle);
     }
