@@ -14,7 +14,7 @@ public class EnvironmentConfig
 
     public float agent_speed = 0.13f;
     public float npc_speed = 0.11f;
-    public float fire_spread = 0.02f;
+    public float fire_spread = 0f;
     public float jump_force = 0.18f;
     public float view_distance = 10f;
     public float light_intensity = 1f;

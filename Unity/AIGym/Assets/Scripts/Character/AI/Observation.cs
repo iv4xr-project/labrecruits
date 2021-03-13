@@ -88,7 +88,7 @@ public class Observation : IAPLSerializable
             // This will cause side effect!!
             // v.y += Constants.epsilon;
             Vector3 diff = (v - eyePosition) + new Vector3(0, Constants.epsilon, 0);
-            float distance = diff.magnitude;
+            float distance = diff.magnitude ; 
 
             //Debug.Log(">>> vertex: " + v);
 
@@ -182,9 +182,13 @@ public class Observation : IAPLSerializable
         if (b == null) b = o.transform.GetComponentInChildren<BoxCollider>();
 
         // @Todo: Shoot multiple rays from object to the eye in order for more precision.
-        // Note: we elevate the position of o a bit, to make it a bit easier for the external
+        // Note: we elevate the position of a tiny epsilon bit, to make it a bit easier for the external
         // agent to spot it.
-        Vector3 startPosition = b.bounds.center + new Vector3(0,0.2f,0); // Position of object boxcollider; b.center * b.transform.localScale.x; // + Vector3.up; (1,0,1) + modeloffset 
+        // Note: elevating by 0.2 is problematic... because if the agent is standing right ontop
+        // of the button, elevating by 0.2 might put it inside the agent's collider :|
+        Vector3 startPosition = b.bounds.center + new Vector3(0, Constants.epsilon, 0); 
+        // Position of object boxcollider; b.center * b.transform.localScale.x;
+        // + Vector3.up; (1,0,1) + modeloffset 
         Vector3 toEye = eyePosition - startPosition; //Calculate the direction of the character.
 
         if (Physics.Raycast(startPosition, toEye.normalized, out RaycastHit hit, toEye.magnitude))
@@ -193,7 +197,7 @@ public class Observation : IAPLSerializable
 
             if (otherObject.tag == "Player" && otherObject.name == "Agent " + agent.id)
             {
-                Debug.Log(">>> can see obj-name:" + otherObject.name + ", agent.id: " + agent.id);
+                Debug.Log(">>> can see obj-name:" + o.name + ", ray-cast-check first hit: " + otherObject.name + ", agent.id: " + agent.id);
                 return true;  // Player can see object
             }
             if (otherObject.GetInstanceID() != o.GetInstanceID()) return false; // Vision is blocked by another object
