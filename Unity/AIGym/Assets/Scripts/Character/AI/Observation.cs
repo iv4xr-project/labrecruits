@@ -12,7 +12,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 /// <summary>
-/// Collects the observed gamestate from an agent's character
+/// Collects the observed gamestate from an agent's character, to be sent to an external
+/// agent that requests it.
 /// </summary>
 
 public struct SerializedAgent
@@ -84,18 +85,20 @@ public class Observation : IAPLSerializable
         List<int> visibleVertexIndices = new List<int>();
         for (int i = 0; i < nav.vertices.Length; i++) {
             Vector3 v = nav.vertices[i];
-            v.y += Constants.epsilon;
-            Vector3 diff = v - eyePosition;
+            // This will cause side effect!!
+            // v.y += Constants.epsilon;
+            Vector3 diff = (v - eyePosition) + new Vector3(0, Constants.epsilon, 0);
+            float distance = diff.magnitude;
 
             //Debug.Log(">>> vertex: " + v);
 
-            if (diff.sqrMagnitude >= character.viewDistanceSqr)     continue; // If the vertex is outside the character's vision radius
+            if (distance >= Character.viewDistance)     continue; // If the vertex is outside the character's vision radius
             // If the vertex is covered by a collider (door or colorscreen), it is not visible.
             // By "covered" it means if e.g. it is inside/engulfed by a collider, so a agent can't possibly
             // move to it anyway:
             if (colliders.Any(c => c.Contains(v)))                  continue; 
             // If the vertex is behind a wall/floor/wall/door, it is not visible:
-            if (Physics.Raycast(eyePosition, diff, diff.magnitude, (1 << 9) | (1 << 10) | (1 << 11))) continue; 
+            if (Physics.Raycast(eyePosition, diff, distance, (1 << 9) | (1 << 10) | (1 << 11))) continue; 
 
             //Debug.Log(">>> " + v + " is visible");
             visibleVertexIndices.Add(i);
@@ -179,7 +182,9 @@ public class Observation : IAPLSerializable
         if (b == null) b = o.transform.GetComponentInChildren<BoxCollider>();
 
         // @Todo: Shoot multiple rays from object to the eye in order for more precision.
-        Vector3 startPosition = b.bounds.center; // Position of object boxcollider; b.center * b.transform.localScale.x; // + Vector3.up; (1,0,1) + modeloffset 
+        // Note: we elevate the position of o a bit, to make it a bit easier for the external
+        // agent to spot it.
+        Vector3 startPosition = b.bounds.center + new Vector3(0,0.2f,0); // Position of object boxcollider; b.center * b.transform.localScale.x; // + Vector3.up; (1,0,1) + modeloffset 
         Vector3 toEye = eyePosition - startPosition; //Calculate the direction of the character.
 
         if (Physics.Raycast(startPosition, toEye.normalized, out RaycastHit hit, toEye.magnitude))
@@ -188,11 +193,12 @@ public class Observation : IAPLSerializable
 
             if (otherObject.tag == "Player" && otherObject.name == "Agent " + agent.id)
             {
-                Debug.Log(">>> obj-name:" + otherObject.name + ", agent.id: " + agent.id);
+                Debug.Log(">>> can see obj-name:" + otherObject.name + ", agent.id: " + agent.id);
                 return true;  // Player can see object
             }
             if (otherObject.GetInstanceID() != o.GetInstanceID()) return false; // Vision is blocked by another object
         }
+        
 
         //Shouldn't happen, this means we couldn't find the character model
 #if false

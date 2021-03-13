@@ -7,7 +7,8 @@ at Utrecht University within the Software and Game project course.
 
 using UnityEngine;
 /// <summary>
-/// AgentController turns agent commands into some action for the character.
+/// AgentController turns agent commands (coming from the external interface e.g. coming
+/// from iv4XR) into some action for the character.
 /// </summary>
 public class AgentController {
     public Character _Character;
@@ -66,15 +67,23 @@ public class AgentController {
                 GameObject interactable = GameObject.Find(interactWith);
                 if (interactable != null)
                 {
+                    Vector3 d = interactable.transform.position - _Character.transform.position;
+                    if(d.sqrMagnitude <= Constants.sqrInteractionDistance)
+                    {
+                        interactable.GetComponent<Interactable>()?.Interact(_Character);
+                    }
+
                     // some game-objects like doors may have their collider(s) burried in a
                     // sub-component, so we should perhaps traverse the sub-components too.
                     // But since right now only switches can be interacted, and they have
                     // their collider at the top, we will just do this for now:
-                    Collider targetCollider = interactable.GetComponent<Collider>();
-                    if (targetCollider != null && _Character.GetComponent<CharacterController>().bounds.Intersects(targetCollider.bounds))
-                    {
-                        interactable.GetComponent<Interactable>()?.Interact(_Character);
-                    }
+                    //
+                    //WP: Disabling this colider-based logic to determine of the object can be interacted to:
+                    //Collider targetCollider = interactable.GetComponent<Collider>();
+                    //if (targetCollider != null && _Character.GetComponent<CharacterController>().bounds.Intersects(targetCollider.bounds))
+                    //{
+                    //    interactable.GetComponent<Interactable>()?.Interact(_Character);
+                    //}
                 }
                 break;
         }

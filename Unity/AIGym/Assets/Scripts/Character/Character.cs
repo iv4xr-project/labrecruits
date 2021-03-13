@@ -247,7 +247,9 @@ public class Character : MonoBehaviour
 
     
     /// <summary>
-    /// Interacts with a switch when in range.
+    /// Interacts with a switch when in range. Note that the logic below will interact with the FIRST
+    /// switch found within the interaction distance, if there is any. The candidates are note sorted
+    /// by distance, so make sure that the switches are not placed too close to each other.
     /// </summary>
     public void Interact()
     {
@@ -257,9 +259,8 @@ public class Character : MonoBehaviour
         foreach (GameObject @switch in switches)
         {
             var sensor = @switch.GetComponent<Interactable>();
-            // giving a bit larger interaction raduis when played by actual player, for convenience
             if (!sensor.interactable
-                || Vector3.Distance(sensor.transform.position, this.transform.position) > 0.9)
+                || Vector3.Distance(sensor.transform.position, this.transform.position) > Constants.interactionDistance)
                 continue;
             Debug.Log($"Interacting with: {sensor.name}, distance {Vector3.Distance(sensor.transform.position, this.transform.position)}");
             sensor.Interact(this);
