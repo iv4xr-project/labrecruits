@@ -6,8 +6,8 @@
 [RequireComponent(typeof(Collider))]
 public class Scoring : MonoBehaviour
 {
-    public Scoring() { }
 
+    public Scoring() { }
 
     /*
      * This should be invoked when the game-object that owns this Scoring component
@@ -33,6 +33,8 @@ public class Scoring : MonoBehaviour
                     };
                 whoDidIt.SetMood(moods[Random.Range(0, moods.Length)]);
                 whoDidIt.Score += scoreGained;
+                AudioSource sound = this.gameObject.GetComponent<AudioSource>();
+                sound.Play(0);
             }
         }
     }
@@ -54,6 +56,8 @@ public class Scoring : MonoBehaviour
                     if (character.hasBeenVisited(oname)) return;
                     scoreGained = 100;
                     character.SetMood("YES!");
+                    AudioSource sound = this.gameObject.GetComponent<AudioSource>();
+                    sound.Play(0);
                     break;
             }
             character.registerVisitedGameObject(oname);

@@ -68,11 +68,11 @@
     <Compile Include="Assets\Plugins\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
     <Compile Include="Assets\Plugins\NavMeshComponents\Scripts\NavMeshSurface.cs" />
     <None Include="Assets\Plugins\NavMeshComponents\Scripts\NavMeshComponents.asmdef" />
-    <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2019.2.6f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -11,6 +11,11 @@ using UnityEngine;
 [JsonObject(MemberSerialization.OptIn)]
 public class FireHazard : Hazard
 {
+    public AudioClip firesizzle ;
+    public AudioClip tension ;
+    public AudioClip death ;
+
+    
     public static float SPREAD_SPEED;
     //Vars to track when to spread and the time before a spread
     private float spreadTimer;
@@ -62,6 +67,20 @@ public class FireHazard : Hazard
                 "That hurts!"
             };
             character.SetMood(moods[Random.Range(0, moods.Length)]);
+            AudioSource sound = this.gameObject.GetComponent<AudioSource>();
+            sound.clip = null ;
+            if (character.Health > 30)
+            {
+                sound.clip = firesizzle ;
+            }
+            else if(character.Health > 0 && character.Health % 10 == 0)
+            {
+                sound.clip = tension ;
+            }
+            else if(character.Health <= 0) {
+                sound.clip = death;
+            }
+            if (sound.clip != null) sound.Play(0);
         }
     }
 
