@@ -233,6 +233,12 @@ public class World : MonoBehaviour
             instance.GetComponent<Colorized>().SetColor(Utils.colorFromHexString(color[1]));
         }
 
+        // handling "od": doors whose state is initially open:
+        if (tile == "od")
+        {
+            instance.GetComponent<Toggleable>().SetState(true);
+        }
+
         // Linking the Toggable and Interactable behavior-"aspects" of buttons to each other.
         // When the switch is interacted-to (when the event onIteract is invoked), this logic will cause its state to be toggled.
         // Note that in this this will fire the switch's onToggle event.

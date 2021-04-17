@@ -70,11 +70,11 @@
     <Compile Include="Assets\Plugins\NavMeshComponents\Editor\NavMeshModifierVolumeEditor.cs" />
     <Compile Include="Assets\Plugins\NavMeshComponents\Editor\NavMeshSurfaceEditor.cs" />
     <None Include="Assets\Plugins\NavMeshComponents\Editor\NavMeshComponentsEditor.asmdef" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>

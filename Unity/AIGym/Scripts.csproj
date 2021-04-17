@@ -121,11 +121,11 @@
     <Compile Include="Assets\Scripts\World\NavMeshHelper.cs" />
     <Compile Include="Assets\Scripts\World\World.cs" />
     <None Include="Assets\Scripts\Scripts.asmdef" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>/Users/iswbprasetya/workshop/projects/iv4xr/labrecruits/Unity/AIGym/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2019.2.6f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
