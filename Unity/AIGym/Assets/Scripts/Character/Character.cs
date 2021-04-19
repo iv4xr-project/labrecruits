@@ -115,8 +115,9 @@ public class Character : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {    
-        
+    {
+
+        if (!IsAlive) return; // otherwise agent-controlled character can still moving
         if (targetLocation.HasValue)
         {
             //check if we have already reached the target

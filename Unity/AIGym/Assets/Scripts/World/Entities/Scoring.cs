@@ -55,6 +55,8 @@ public class Scoring : MonoBehaviour
                 case "Goal":
                     if (character.hasBeenVisited(oname)) return;
                     scoreGained = 100;
+                    // heal the character too:
+                    character.Health = character.maxHealth ;
                     character.SetMood("YES!");
                     AudioSource sound = this.gameObject.GetComponent<AudioSource>();
                     sound.Play(0);
