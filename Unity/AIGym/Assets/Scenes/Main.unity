@@ -853,6 +853,10 @@ MonoBehaviour:
     group: 3
     prefabs:
     - {fileID: 4075524128981935646, guid: e79c1a14841906b468cc8f1a6461c0f9, type: 3}
+  - symbol: od
+    group: 1
+    prefabs:
+    - {fileID: 3881045428895643281, guid: a0616dc5acee449dea1d24e13746a29b, type: 3}
 --- !u!4 &385153794
 Transform:
   m_ObjectHideFlags: 0
