@@ -95,6 +95,7 @@ public class NPCObserveableVariant : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(NPCObserveableVariant))]
 public class NPCObserveableVariantEditor : Editor
 {
@@ -119,3 +120,4 @@ public class NPCObserveableVariantEditor : Editor
         }
     }
 }
+#endif
