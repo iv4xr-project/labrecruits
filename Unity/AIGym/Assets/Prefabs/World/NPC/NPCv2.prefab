@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3362954972328313487}
-  - component: {fileID: 3362954972328313483}
-  - component: {fileID: 3362954972328313482}
-  - component: {fileID: 3362954972328313481}
   - component: {fileID: 3362954972328313480}
+  - component: {fileID: 3362954972328313483}
+  - component: {fileID: 3362954972328313481}
+  - component: {fileID: 3362954972328313482}
+  - component: {fileID: 5751766576532552937}
   m_Layer: 0
   m_Name: NPCv2
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,6 +36,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3362954972328313480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362954972328313486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade35d020dd894b428232786ea38ffc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 0.1
+  walkingDistance: 10
+  points: []
 --- !u!195 &3362954972328313483
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -57,22 +73,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3362954972328313482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3362954972328313486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  components:
-  - {fileID: 3362954972328313481}
-  syncBoxColliders: 1
-  LayerIgnore: 
 --- !u!114 &3362954972328313481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     Shirt: {r: 0.3458592, g: 0.22610283, b: 0.019196764, a: 1}
     Pants: {r: 0.4456213, g: 0.39541316, b: 0.37890598, a: 1}
     Shoe: {r: 0.7283651, g: 0.72871226, b: 0.7213898, a: 1}
---- !u!114 &3362954972328313480
+--- !u!114 &3362954972328313482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,12 +102,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3362954972328313486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade35d020dd894b428232786ea38ffc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 931dfb7f1e7a3c44babfb8ba5bd27cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0.1
-  walkingDistance: 10
-  points: []
+  components:
+  - {fileID: 3362954972328313481}
+  syncBoxColliders: 1
+  LayerIgnore: 
+--- !u!65 &5751766576532552937
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362954972328313486}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3362954972072325106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,11 +134,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Human
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 8f54bb05e38d67b46815b532430414d3,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: bf954bd7145cbd24caa6c3b646a08ef7, type: 2}
     - target: {fileID: -4216859302048453862, guid: 8f54bb05e38d67b46815b532430414d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -195,6 +204,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.31
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 8f54bb05e38d67b46815b532430414d3,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bf954bd7145cbd24caa6c3b646a08ef7, type: 2}
     - target: {fileID: 3936731115384413758, guid: 8f54bb05e38d67b46815b532430414d3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

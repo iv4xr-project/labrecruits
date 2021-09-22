@@ -17,6 +17,7 @@ TagManager:
   - Wire
   - Lab
   - ColorScreen
+  - NPC
   layers:
   - Default
   - TransparentFX
