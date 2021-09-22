@@ -32,7 +32,13 @@ public class APLSynced : MonoBehaviour, IAPLSerializable
                 .GetComponentsInChildren<BoxCollider>()
                 .Where(x => x.enabled && !LayerIgnore.Any(l => l == x.gameObject.layer))
                 .Select(x => new SerializedBoxCollider(x)));
+        if(gameObject.tag == "NPC")
+        {
+            // WP, HACK:
+            // for NPC we don't need sub-objects ... will in fact break for some reason i dont know..
+            return data;
 
+        }
         foreach (var item in components)
             data[item.GetType().Name] = JObject.FromObject(item, serializer);
 

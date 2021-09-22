@@ -148,6 +148,18 @@ public class Observation : IAPLSerializable
         return colliders;
     }
 
+    int debugCount1 = 0;
+    void debugMsgStart(String s)
+    {
+        UserErrorInfo.ErrorWriter.AddMessage("[" + debugCount1 + "] " + s );
+        debugCount1++;
+    }
+
+    void debugMsgEnd(String s)
+    {
+        UserErrorInfo.ErrorWriter.AddMessage(s);
+    }
+
     /// <summary>
     /// Adds all visible GameObjects in the <see cref="Character"/>'s vision to the approriate entity list.
     /// </summary>
@@ -157,7 +169,11 @@ public class Observation : IAPLSerializable
         Vector3 eye = agent.position + character.relativeEyePosition; //Translates player position to player view.
         Collider[] hitColliders = Physics.OverlapSphere(eye, Character.viewDistance); // @Todo, see if we can use layer mask to strip out walls/floors
 
+        //Debug.Log("=============== checking visible objects...");
+        //UserErrorInfo.ErrorWriter.AddMessage("=============== checking visible objects...");
+
         foreach (Collider hitCollider in hitColliders) {
+
             GameObject o = Utils.GetFirstObjectWithTag(hitCollider.gameObject);
             
             if (ignored.Contains(o.tag))          continue; // Object needs to be interesting
@@ -168,7 +184,9 @@ public class Observation : IAPLSerializable
             o.GetComponentsInParent(false, synced); 
             o.GetComponentsInChildren(false, synced);
             objects.UnionWith(synced);
+            
         }
+
     }
 
     /// <summary>
@@ -197,12 +215,15 @@ public class Observation : IAPLSerializable
 
             if (otherObject.tag == "Player" && otherObject.name == "Agent " + agent.id)
             {
-                Debug.Log(">>> can see obj-name:" + o.name + ", ray-cast-check first hit: " + otherObject.name + ", agent.id: " + agent.id);
+                //Debug.Log(">>> can see obj-name:" + o.name + ", ray-cast-check first hit: " + otherObject.name + ", agent.id: " + agent.id);
                 return true;  // Player can see object
             }
-            if (otherObject.GetInstanceID() != o.GetInstanceID()) return false; // Vision is blocked by another object
+            if (otherObject.GetInstanceID() != o.GetInstanceID())
+            {
+                return false; // Vision is blocked by another object
+            }
         }
-        
+
 
         //Shouldn't happen, this means we couldn't find the character model
 #if false
