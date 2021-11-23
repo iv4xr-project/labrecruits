@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine.Events;
 using System;
+using UnityEditor.TestTools.CodeCoverage;
 
 /* Welcome to Lab Recruits, an agent testing facility for Aplib agents.
  * 
@@ -76,6 +77,8 @@ public class Lab : MonoBehaviour
                 var disconnectRequest = RawRequest<bool>.CreateFrom(message);
                 UserErrorInfo.ErrorWriter.AddMessage("Client requested a DISCONNECT");
                 Respond(client, disconnectRequest, true);
+                // Stop Code Coverage and create results if feature enabled
+                CodeCoverage.StopRecording();
                 break;
 
             case RequestType.PAUSE:
