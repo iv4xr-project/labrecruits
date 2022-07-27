@@ -17,6 +17,9 @@ public class Character : MonoBehaviour
     public static EventHandler<GameObject> OnStartEvent;
     public static EventHandler<GameObject> OnDestroyEvent;
 
+    public AudioClip tension;
+    public AudioClip death;
+
     public string agentID; // @Refactor, this should not be in Character, or it should be renamed
     
     public static float characterSpeed = 1f;
@@ -45,7 +48,7 @@ public class Character : MonoBehaviour
     private int _health;
     private int _score = 0 ;
 
-    private HashSet<string> _visitedPointWorthObjects = new HashSet<string>();
+    public HashSet<string> _visitedPointWorthObjects = new HashSet<string>();
     private HashSet<string> _turnedOnSwitches = new HashSet<string>();
 
     public Color debugColor;
@@ -75,8 +78,26 @@ public class Character : MonoBehaviour
         set
         {
             _health = value;
-            if (_health <= 0)
+
+            string[] moods =
+            {
+                "Ouch",
+                ":(",
+                "That hurts!"
+            };
+            SetMood(moods[UnityEngine.Random.Range(0, moods.Length)]);
+            AudioSource sound = this.gameObject.GetComponent<AudioSource>();
+            sound.clip = null;
+            if (Health < 30 && Health > 0 && Health % 10 == 0)
+            {
+                sound.clip = tension;
+            }
+            else if (Health <= 0)
+            {
                 UserErrorInfo.ErrorWriter.AddMessage($"Agent {agentID} has died.", true, ErrorType.General);
+                sound.clip = death;
+            }
+            if (sound.clip != null) sound.Play(0);
         }
     }
 

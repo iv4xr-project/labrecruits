@@ -18,6 +18,8 @@ TagManager:
   - Lab
   - ColorScreen
   - NPC
+  - AgentManager
+  - Enemy
   layers:
   - Default
   - TransparentFX

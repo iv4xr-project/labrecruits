@@ -24,7 +24,7 @@ public class UserErrorInfo : MonoBehaviour
 {
     public static UserErrorInfo ErrorWriter = null;
     
-    public readonly string logPath = "/Logs/test.txt";
+    public readonly string logPath = "GeneralInfo";
     public readonly float messageDuration = 8;
 
     List<string> loggedErrors = new List<string>();
@@ -116,7 +116,9 @@ public class UserErrorInfo : MonoBehaviour
 
         string path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "AIGym-Logs");
         Directory.CreateDirectory(path);
-        string filePath = Path.Combine(path, System.DateTime.Now.ToString("yyyyMMddTHHmmss") + ".txt"); //Temporary file naming convention
+        path = Path.Combine(path, System.DateTime.Now.ToString("yyyyMMddTHHmmss"));
+        Directory.CreateDirectory(path);
+        string filePath = Path.Combine(path, logPath + ".txt"); //Temporary file naming convention
 
         if (!File.Exists(filePath))
         {

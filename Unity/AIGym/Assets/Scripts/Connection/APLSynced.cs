@@ -32,7 +32,7 @@ public class APLSynced : MonoBehaviour, IAPLSerializable
                 .GetComponentsInChildren<BoxCollider>()
                 .Where(x => x.enabled && !LayerIgnore.Any(l => l == x.gameObject.layer))
                 .Select(x => new SerializedBoxCollider(x)));
-        if(gameObject.tag == "NPC")
+        if(gameObject.tag == "NPC" || gameObject.tag == "Enemy") //I assume this hack is also needed for Enemy, as it is very similar to NPC?
         {
             // WP, HACK:
             // for NPC we don't need sub-objects ... will in fact break for some reason i dont know..
