@@ -59,7 +59,7 @@ public class FireHazard : Hazard
         {
             character.Health -= 5;
             AudioSource sound = this.gameObject.GetComponent<AudioSource>();
-            sound.clip = null ;
+            sound.clip = null;
             if (character.Health > 30)
             {
                 sound.clip = firesizzle ;

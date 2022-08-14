@@ -12,7 +12,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Character class for character functionality.
 /// </summary>
-public class Character : MonoBehaviour
+public class Character : IHasMood
 {
     public static EventHandler<GameObject> OnStartEvent;
     public static EventHandler<GameObject> OnDestroyEvent;
@@ -77,7 +77,9 @@ public class Character : MonoBehaviour
         get { return _health; }
         set
         {
+            int oldHealth = _health;
             _health = value;
+            if (_health >= oldHealth) return; //we got healed
 
             string[] moods =
             {
@@ -305,7 +307,7 @@ public class Character : MonoBehaviour
     /// Returns the current mood.   
     /// </summary>
     /// <returns></returns>
-    public Mood GetMood() => _mood;
+    public override Mood GetMood() => _mood;
 
     /*
      * Check if the game-object with the given name (assumed unique) has been visited by this

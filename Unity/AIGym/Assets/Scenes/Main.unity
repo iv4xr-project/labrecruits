@@ -5514,6 +5514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentManager: {fileID: 1420158813}
+  gameOver: 1
 --- !u!1 &2016043277
 GameObject:
   m_ObjectHideFlags: 0

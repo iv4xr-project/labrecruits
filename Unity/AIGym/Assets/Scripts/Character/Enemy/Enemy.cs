@@ -9,19 +9,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
+using System;
 
-public class Enemy : MonoBehaviour
+public class Enemy : IHasMood
 {
     public float waitTime;
     public static float walkingSpeed;
     public float walkingDistance;
     public float visionDistance;
+    public float shortCooldown = 2;
+    public int attacksBeforeLongCooldown = 3;
+    public float longCooldown = 10;
 
     private float _timer = 0;
+    private int attacks = 0;
     private Animator _animator;
     private NavMeshAgent _agent;
     
     private AgentManager agentManager;
+    private Character.Mood mood;
     
     // Start is called before the first frame update
     void Start()
@@ -54,6 +60,12 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        if (_agent.destination == transform.position)
+        {
+            mood.value = "Heal Me..."; //TODO IMood: GetMood, add MoodBubble
+            mood.lastSet = DateTime.Now;
+        }
+
         if (closestAgent.distance < 1f)
             DoDamage(closestAgent.agent);
         else
@@ -67,6 +79,18 @@ public class Enemy : MonoBehaviour
     {
         toAgent.Health -= 10;
         _agent.destination = transform.position;
-        _timer = 2f;
+        attacks++;
+        if (attacks >= attacksBeforeLongCooldown)
+        {
+            _timer = longCooldown;
+            attacks = 0;
+        }
+        else _timer = shortCooldown;
+
+        AudioSource sound = this.gameObject.GetComponent<AudioSource>();
+        if (toAgent.Health > 30)
+            sound.Play(0); //sound effect from https://freesound.org/people/Breviceps/sounds/445983/
     }
+
+    public override Character.Mood GetMood() => mood;
 }

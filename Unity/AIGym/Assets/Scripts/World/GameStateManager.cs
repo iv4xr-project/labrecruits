@@ -11,7 +11,7 @@ using System.Linq;
 public class GameStateManager : MonoBehaviour
 {
     public AgentManager agentManager;
-    private bool gameOver = true;
+    public bool gameOver = true;
 
     public void StartGame()
     {

@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d0a5e16c689714591318aeefb220ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 3935413749108114011}
+  moodObject: {fileID: 3935413749108114011}
   textField: {fileID: 3360360059700235970}
 --- !u!1 &8988546643313632691
 GameObject:
