@@ -19,4 +19,4 @@ How to play the game, how to create a level: see the wiki.
 #### Contributors
 
 **Computer Science students from Utrecht University:** Adam Smits, August van Casteren, Bram Smit, Frank Hoogmoed, Jacco van Mourik, Jesse van de Berg, Maurin Voshol, Menno Klunder, Stijn Hinlopen, Tom Tanis. **Game Artists from Mediacollege Amsterdam:** Quinto Veldhuyzen, Sophie Meester.
-**Later upgrades we contributed by:** Wishnu Prasetya, Naraenda Prasetya, Samuel Mens.
+**Later upgrades by:** Wishnu Prasetya, Naraenda Prasetya, Samuel Mens.
