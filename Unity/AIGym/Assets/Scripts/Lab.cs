@@ -211,7 +211,7 @@ public class Lab : MonoBehaviour
         foreach (var c in _characters)
         {
             c.debugColor = new Color(UnityEngine.Random.Range(0, 1), UnityEngine.Random.Range(0, 1), UnityEngine.Random.Range(0, 1), 0.3f);
-            _agentControllers.Add(c.agentID, new AgentController(c, new Observation(c.agentID)));
+            _agentControllers.Add(c.agentID, new AgentController(c, new Observation(c.agentID), _world.gameStateManager));
         }
 
         _nav = _world.transform.GetComponent<NavMeshHelper>().GenerateNavMesh();

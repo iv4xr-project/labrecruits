@@ -12,10 +12,13 @@ using System.Collections.Generic;
 /// <summary>
 /// Character class for character functionality.
 /// </summary>
-public class Character : MonoBehaviour
+public class Character : IHasMood
 {
     public static EventHandler<GameObject> OnStartEvent;
     public static EventHandler<GameObject> OnDestroyEvent;
+
+    public AudioClip tension;
+    public AudioClip death;
 
     public string agentID; // @Refactor, this should not be in Character, or it should be renamed
     
@@ -45,7 +48,7 @@ public class Character : MonoBehaviour
     private int _health;
     private int _score = 0 ;
 
-    private HashSet<string> _visitedPointWorthObjects = new HashSet<string>();
+    public HashSet<string> _visitedPointWorthObjects = new HashSet<string>();
     private HashSet<string> _turnedOnSwitches = new HashSet<string>();
 
     public Color debugColor;
@@ -74,9 +77,29 @@ public class Character : MonoBehaviour
         get { return _health; }
         set
         {
+            int oldHealth = _health;
             _health = value;
-            if (_health <= 0)
+            if (_health >= oldHealth) return; //we got healed
+
+            string[] moods =
+            {
+                "Ouch",
+                ":(",
+                "That hurts!"
+            };
+            SetMood(moods[UnityEngine.Random.Range(0, moods.Length)]);
+            AudioSource sound = this.gameObject.GetComponent<AudioSource>();
+            sound.clip = null;
+            if (Health < 30 && Health > 0 && Health % 10 == 0)
+            {
+                sound.clip = tension;
+            }
+            else if (Health <= 0)
+            {
                 UserErrorInfo.ErrorWriter.AddMessage($"Agent {agentID} has died.", true, ErrorType.General);
+                sound.clip = death;
+            }
+            if (sound.clip != null) sound.Play(0);
         }
     }
 
@@ -284,7 +307,7 @@ public class Character : MonoBehaviour
     /// Returns the current mood.   
     /// </summary>
     /// <returns></returns>
-    public Mood GetMood() => _mood;
+    public override Mood GetMood() => _mood;
 
     /*
      * Check if the game-object with the given name (assumed unique) has been visited by this

@@ -43,12 +43,14 @@ public class World : MonoBehaviour
     private Dictionary<EntityGroup, GameObject> sceneHierarchyNodes;
 
     private HashSet<string> agentIDs = new HashSet<string>();
+    public AgentManager agentManager;
 
     private readonly static char ID_SEPERATOR = '^';
     private readonly static char ROT_SEPERATOR = '>';
     private readonly static char COL_SEPERATOR = '#';
     
     private WireBuilder _wireBuilder;
+    public GameStateManager gameStateManager;
 
     private void Awake()
     {
@@ -76,6 +78,7 @@ public class World : MonoBehaviour
     /// <param name="path">Path to CSV file in the Resources folder</param>
     public void LoadLevel(EnvironmentConfig config)
     {
+        gameStateManager.StartGame();
         PreBuildConfiguration(config);
         BuildLevel(config.level_path);
         PostBuildConfiguration(config);
@@ -141,7 +144,7 @@ public class World : MonoBehaviour
             ConnectLinks(sheets[0]);
 
         UserErrorInfo.ErrorWriter.AddMessage("Finished loading level", false);
-        UserErrorInfo.ErrorWriter.FlushErrorLog();
+        //UserErrorInfo.ErrorWriter.FlushErrorLog();
     }
 
     private void PostBuildConfiguration(EnvironmentConfig config)
@@ -396,6 +399,7 @@ public class World : MonoBehaviour
 
         var character = instance.GetComponent<Character>();
         character.agentID = id;
+        agentManager.AddAgent(character);
     }
 
     /// <summary>

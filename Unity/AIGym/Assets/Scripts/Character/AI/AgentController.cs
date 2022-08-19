@@ -13,14 +13,16 @@ using UnityEngine;
 public class AgentController {
     public Character _Character;
     public Observation observation;
+    public GameStateManager gameStateManager;
 
     /// <summary>
     /// Contstructor method for AgentController.
     /// </summary>
-    public AgentController(Character character, Observation o)
+    public AgentController(Character character, Observation o, GameStateManager manager)
     {
         _Character = character;
         observation = o;
+        gameStateManager = manager;
     }
 
     /// <summary>
@@ -88,7 +90,7 @@ public class AgentController {
                 break;
         }
 
-        observation.Observe(_Character, gameTick, nav, c.cmd);
+        observation.Observe(_Character, gameTick, nav, c.cmd, gameStateManager.gameOver);
         return observation;
     }
 }

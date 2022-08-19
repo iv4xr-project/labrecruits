@@ -31,6 +31,7 @@ public struct SerializedMeta
 {
     public int tick;
     public DateTime time;
+    public bool gameover;
 }
 
 public class Observation : IAPLSerializable
@@ -50,11 +51,12 @@ public class Observation : IAPLSerializable
     /// <summary>
     /// Records the current state of the world from the perspective of a Character
     /// </summary>
-    public void Observe(Character character, int gameTick, NavMeshContainer nav, AgentCommandType usedAction) {
+    public void Observe(Character character, int gameTick, NavMeshContainer nav, AgentCommandType usedAction, bool gameOver) {
         objects.Clear();
 
         meta.tick = gameTick;
         meta.time = DateTime.Now;
+        meta.gameover = gameOver;
 
         agent.position = character.transform.position;
         agent.didNothing = usedAction == AgentCommandType.DONOTHING;
@@ -67,12 +69,12 @@ public class Observation : IAPLSerializable
         navMeshIndices = GetAllVisibleVertexIndices(character, nav);
     }
 
-    public static Observation FromCharacter(string agentID, Character character, int gameTick, NavMeshContainer nav, AgentCommandType usedAction)
-    {
-        Observation obs = new Observation(agentID);
-        obs.Observe(character, gameTick, nav, usedAction);
-        return obs;
-    }
+    //public static Observation FromCharacter(string agentID, Character character, int gameTick, NavMeshContainer nav, AgentCommandType usedAction)
+    //{
+    //    Observation obs = new Observation(agentID);
+    //    obs.Observe(character, gameTick, nav, usedAction);
+    //    return obs;
+    //}
 
     /// <summary>
     /// Returns the indices of vertices that are visible from a character's eye height. 
