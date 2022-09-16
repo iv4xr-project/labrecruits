@@ -42,7 +42,8 @@ public class Observation : IAPLSerializable
 
     public int[] navMeshIndices;
 
-    private static readonly HashSet<string> ignored = new HashSet<string> { "Wall", "Floor", "Player", "Wire"};
+    //private static readonly HashSet<string> ignored = new HashSet<string> { "Wall", "Floor", "Player", "Wire"};
+    private static readonly HashSet<string> ignored = new HashSet<string> { "Wall", "Floor", "Wire" };
 
     public Observation(string agentID) {
         agent.id = agentID;
@@ -177,8 +178,9 @@ public class Observation : IAPLSerializable
         foreach (Collider hitCollider in hitColliders) {
 
             GameObject o = Utils.GetFirstObjectWithTag(hitCollider.gameObject);
-            
+
             if (ignored.Contains(o.tag))          continue; // Object needs to be interesting
+            if (o.name == "Agent " + agent.id)    continue;
             if (!IsObjectVisibleToPlayer(o, eye)) continue; // Object can't be blocked
 
             // Get relevant APLSynced scripts
@@ -201,14 +203,26 @@ public class Observation : IAPLSerializable
         o.transform.TryGetComponent(out BoxCollider b);
         if (b == null) b = o.transform.GetComponentInChildren<BoxCollider>();
 
-        // @Todo: Shoot multiple rays from object to the eye in order for more precision.
-        // Note: we elevate the position of a tiny epsilon bit, to make it a bit easier for the external
-        // agent to spot it.
-        // Note: elevating by 0.2 is problematic... because if the agent is standing right ontop
-        // of the button, elevating by 0.2 might put it inside the agent's collider :|
-        Vector3 startPosition = b.bounds.center + new Vector3(0, Constants.epsilon, 0); 
-        // Position of object boxcollider; b.center * b.transform.localScale.x;
-        // + Vector3.up; (1,0,1) + modeloffset 
+        Vector3 startPosition ;
+
+        if (o.tag == "Player")
+        {
+            startPosition = o.transform.position + new Vector3(0, 0.8f, 0);
+            //Debug.Log(">>> " + o.name + ", @" + startPosition);
+        }
+        else
+        {
+            // @Todo: Shoot multiple rays from object to the eye in order for more precision.
+            // Note: we elevate the position of a tiny epsilon bit, to make it a bit easier for the external
+            // agent to spot it.
+            // Note: elevating by 0.2 is problematic... because if the agent is standing right ontop
+            // of the button, elevating by 0.2 might put it inside the agent's collider :|
+            //Debug.Log(">>> " + o.name + ", tag: " + o.tag);
+            startPosition = b.bounds.center + new Vector3(0, Constants.epsilon, 0);
+            // Position of object boxcollider; b.center * b.transform.localScale.x;
+            // + Vector3.up; (1,0,1) + modeloffset
+        }
+
         Vector3 toEye = eyePosition - startPosition; //Calculate the direction of the character.
 
         if (Physics.Raycast(startPosition, toEye.normalized, out RaycastHit hit, toEye.magnitude))
