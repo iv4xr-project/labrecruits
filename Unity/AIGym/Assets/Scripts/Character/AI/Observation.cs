@@ -180,7 +180,9 @@ public class Observation : IAPLSerializable
             GameObject o = Utils.GetFirstObjectWithTag(hitCollider.gameObject);
 
             if (ignored.Contains(o.tag))          continue; // Object needs to be interesting
-            if (o.name == "Agent " + agent.id)    continue;
+            // skipping this check, candidates seem to exclude the agent itself: 
+            // if (o.name == "Agent " + agent.id)    continue;
+           
             if (!IsObjectVisibleToPlayer(o, eye)) continue; // Object can't be blocked
 
             // Get relevant APLSynced scripts

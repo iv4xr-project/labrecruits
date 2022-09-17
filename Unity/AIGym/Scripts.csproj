@@ -68,7 +68,6 @@
     <Compile Include="Assets\Scripts\Character\AI\AgentController.cs" />
     <Compile Include="Assets\Scripts\Character\AI\AgentInfoLogger.cs" />
     <Compile Include="Assets\Scripts\Character\AI\AgentManager.cs" />
-    <Compile Include="Assets\Scripts\Character\AI\Entity.cs" />
     <Compile Include="Assets\Scripts\Character\AI\Observation.cs" />
     <Compile Include="Assets\Scripts\Character\AI\ScreenshotObservation.cs" />
     <Compile Include="Assets\Scripts\Character\CameraBehaviour.cs" />

@@ -11,56 +11,6 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using UnityEngine;
 
-// @Incomplete, this custom converter is not used right now, but would help us with serializing/deserializing Commands and Entities.
-// However, this requires a custom converter in aplib as well, which is harder.
-class PolymorphicJsonConverter : JsonConverter {
-
-    public override bool CanWrite => true;
-    public override bool CanRead => true;
-
-    public override bool CanConvert(Type objectType)
-    {
-        return typeof(Entity).IsAssignableFrom(objectType);
-    }
-
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-        JObject item = JObject.Load(reader);
-
-        var eType = typeof(Entity);
-
-        switch (item["entityType"].Value<string>())
-        {
-            case "InteractiveEntity":
-                eType = typeof(InteractiveEntity);
-                break;
-
-            case "DynamicEntity":
-                eType = typeof(DynamicEntity);
-                break;
-            default:
-                break;
-        }
-        
-        serializer.Populate(item.CreateReader(), eType);
-        return eType;
-    }
-
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-    {
-        JObject o = JObject.FromObject(value);
-        if (value is InteractiveEntity)
-        {
-            //o.AddFirst(new JProperty("type", new JValue("InteractiveEntity")));
-        }
-        else if (value is DynamicEntity)
-        {
-            //o.AddFirst(new JProperty("type", new JValue("DynamicEntity")));
-        }
-
-        o.WriteTo(writer);
-    }
-
-}
 
 // From: https://stackoverflow.com/questions/20995865/deserializing-json-to-abstract-class
 public class BaseSpecifiedConcreteClassConverter : DefaultContractResolver
