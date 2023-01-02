@@ -50,6 +50,7 @@ public class Character : IHasMood
 
     public HashSet<string> _visitedPointWorthObjects = new HashSet<string>();
     private HashSet<string> _turnedOnSwitches = new HashSet<string>();
+    CameraBehaviour _cameraBehavior ;
 
     public Color debugColor;
 
@@ -68,6 +69,8 @@ public class Character : IHasMood
         _animator = GetComponentInChildren<Animator>();
 
         relativeEyePosition = GetComponentInChildren<Camera>().transform.position - _transform.position;
+
+        _cameraBehavior = FindObjectOfType<CameraBehaviour>() ;
 
         //GetComponent<Renderer>().material.SetColor("Pink", new Color(1, 1, 0));
     }
@@ -200,9 +203,16 @@ public class Character : IHasMood
             }
         }
 
+        //Debug.Log(">>> "
+        //    + this.agentID + ", floor: " + GetFloor()
+        //    + ", active floor: " + _cameraBehavior.cameraFloor
+        //    );
 
-        if (!_characterController.isGrounded)
+        if ((!_characterController.isGrounded) && this.GetFloor() <= _cameraBehavior.cameraFloor)
+        {
+            //Debug.Log("### falling " + this.agentID) ;
             _moveDirection.y -= 1f;
+        }
 
         if (_characterController.isGrounded && _moveDirection.y <= 0f)
             _moveDirection.y = -.01f;

@@ -76,7 +76,7 @@ public class CameraBehaviour : MonoBehaviour
         _topDownCamera.enabled = !_topDownCamera.enabled;
 
 
-        //turn off ceiling in third person, enable in first person
+        //make ceiling invisible in third person, and visible in first person
         if (firstPersonCamera.enabled)
             EnableAllFloors();
         else
@@ -120,31 +120,66 @@ public class CameraBehaviour : MonoBehaviour
     }
 
     /// <summary>
-    /// Render objects from all floors
+    /// Render objects from all floors.
     /// </summary>
     private void EnableAllFloors()
     {
+        // setting all floors visible ...
         foreach (Transform item in _world.transform)
         {
+            if (item.gameObject.tag == "Player")
+            {
+                item.gameObject.GetComponent<Renderer>().enabled = true ;
+                continue;
+            }
+
             if (!item.name.Contains("Floor")) continue;
 
             int floorNumber = int.Parse(item.name.Split(' ')[1]);
-            item.gameObject.SetActive(true);
+            //item.gameObject.SetActive(true);
+            var rs = item.gameObject.GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in rs)
+            {
+                r.enabled = true ;
+            }
         }
+
+        // Setting other agents visible too; they are handled separately since
+        // they can move between floors:
+        foreach (Character a in GameObject.FindObjectsOfType<Character>())
+        {
+            Utils.SetVisibility(a.gameObject, true);
+        }
+
     }
 
     /// <summary>
-    /// Deactivate all floors above a certain height
+    /// Deactivate all floors above a certain height. By this we mean turning them invisible.
     /// </summary>
     private void DisableFloors()
     {
+        int floorNumber;
+
+        // switching high floors to invisible:
         foreach (Transform item in _world.transform)
         {
-            if (!item.name.Contains("Floor")) continue;
+            if (! item.name.Contains("Floor")) continue;
 
-            int floorNumber = int.Parse(item.name.Split(' ')[1]);
-            item.gameObject.SetActive(floorNumber <= cameraFloor);
+            //Debug.Log(">>> " + item.gameObject.name + ":" + item.gameObject.tag);
+
+            floorNumber = int.Parse(item.name.Split(' ')[1]);
+            //item.gameObject.SetActive(floorNumber <= cameraFloor);
+            // we should not use SetActive as it will also disable the objects' logic
+            Utils.SetVisibility(item.gameObject, floorNumber <= cameraFloor);
         }
+
+        // Setting other agents in high floors invisible too; they are handled separately since
+        // they can move between floors:
+        foreach (Character a in GameObject.FindObjectsOfType<Character>())
+        {
+            Utils.SetVisibility(a.gameObject, a.GetFloor() <= cameraFloor);
+        }
+
     }
 
     /// <summary>

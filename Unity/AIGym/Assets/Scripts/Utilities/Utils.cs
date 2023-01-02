@@ -76,4 +76,18 @@ public class Utils
      
         return System.IO.File.ReadAllText(filePath);
     }
+
+    /// <summary>
+    /// Make the given gameobject visible/unvisible. This is done by turning its renderer(s)
+    /// on/off. The logic of the object itself is still active.
+    /// </summary>
+    public static void SetVisibility(GameObject obj, bool visibility)
+    {
+        Renderer[] rs = obj.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rs)
+        {
+            r.enabled = visibility;
+        }
+    }
+
 }

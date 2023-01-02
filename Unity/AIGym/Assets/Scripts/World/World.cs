@@ -239,7 +239,10 @@ public class World : MonoBehaviour
         // handling "od": doors whose state is initially open:
         if (tile == "od")
         {
-            instance.GetComponent<Toggleable>().SetState(true);
+            // instance.GetComponent<Toggleable>().SetState(true);
+            // well... this is beter, as it wont trigger the entire SetState logic:
+            instance.GetComponent<Toggleable>().isActive = true;
+            instance.GetComponent<Animator>()?.SetBool("toggleState", true);
         }
 
         // Linking the Toggable and Interactable behavior-"aspects" of buttons to each other.

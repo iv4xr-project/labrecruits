@@ -25,10 +25,20 @@ public class Enemy : IHasMood
     private int attacks = 0;
     private Animator _animator;
     private NavMeshAgent _agent;
+    private CameraBehaviour _cameraBehavior ;
     
     private AgentManager agentManager;
     private Character.Mood mood;
-    
+
+    public Transform _transform; //Cached transform, to prevent Unity safety code
+
+
+    private void Awake()
+    {
+        _transform = transform;
+        _cameraBehavior = FindObjectOfType<CameraBehaviour>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +54,12 @@ public class Enemy : IHasMood
 
         _timer -= Time.deltaTime;
         if (_timer > 0) return;
+
+        // Sometimes the CameraBehavior class cannot make an enemy that cross floors visible
+        // when it enters the same floor as the current camera floor (due to the incomplete
+        // logic there). This should force the monster to become visible:
+        Utils.SetVisibility(this.gameObject, this.GetFloor() <= _cameraBehavior.cameraFloor) ;
+        
 
         if (!_agent.pathPending && agentManager != null)
             GotoClosestPlayer();
@@ -90,6 +106,14 @@ public class Enemy : IHasMood
         AudioSource sound = this.gameObject.GetComponent<AudioSource>();
         if (toAgent.Health > 30)
             sound.Play(0); //sound effect from https://freesound.org/people/Breviceps/sounds/445983/
+    }
+
+    /// <summary>
+    /// Returns the floor the agent is on, based on its Y coordinate.
+    /// </summary>
+    public int GetFloor()
+    {
+        return (int)Math.Round(this._transform.position.y - 0.3); //@todo, what is 0.3 based on?
     }
 
     public override Character.Mood GetMood() => mood;
