@@ -17,7 +17,8 @@ public class EnvironmentConfig
     public float fire_spread = 0f;
     public float jump_force = 0.18f;
     public float view_distance = 10f;
-    public float light_intensity = 1f;
+    // set light intensity to low by default (dark-mode)
+    public float light_intensity = 0f; //1f;
 
     public Tuple<string, string>[] add_links = new Tuple<string, string>[0];
     public Tuple<string, string>[] remove_links = new Tuple<string, string>[0];

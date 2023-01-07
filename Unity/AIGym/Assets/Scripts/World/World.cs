@@ -98,6 +98,9 @@ public class World : MonoBehaviour
         FireHazard.SPREAD_SPEED = config.fire_spread;
         // setting the light intensity here
         RenderSettings.ambientIntensity = config.light_intensity;
+        //RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+        RenderSettings.ambientLight = Color.black;
+        RenderSettings.reflectionIntensity = 0;
     }
 
     private void BuildLevel(string path)
