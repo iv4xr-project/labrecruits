@@ -72,12 +72,12 @@
     <Compile Include="Assets\Scripts\Character\AI\ScreenshotObservation.cs" />
     <Compile Include="Assets\Scripts\Character\CameraBehaviour.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterSpotLightLogic.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy\EnemyObserveableVariant.cs" />
     <Compile Include="Assets\Scripts\Character\FirstPersonCameraBehaviour.cs" />
     <Compile Include="Assets\Scripts\Character\IHasMood.cs" />
     <Compile Include="Assets\Scripts\Character\MoodBubble.cs" />
-    <Compile Include="Assets\Scripts\Character\CharacterSpotLightLogic.cs" />
     <Compile Include="Assets\Scripts\Character\NPC\NPC.cs" />
     <Compile Include="Assets\Scripts\Character\NPC\NPCObserveableVariant.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
