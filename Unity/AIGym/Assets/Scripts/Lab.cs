@@ -2,7 +2,7 @@
 This program has been developed by students from the bachelor Computer Science
 at Utrecht University within the Software and Game project course.
 
-©Copyright Utrecht University (Department of Information and Computing Sciences)
+?Copyright Utrecht University (Department of Information and Computing Sciences)
 */
 
 using UnityEngine;
@@ -107,6 +107,12 @@ public class Lab : MonoBehaviour
                 }
                 else
                     UserErrorInfo.ErrorWriter.AddMessage("Agent with ID '" + agentRequest.arg.agentId + "' does not exist");
+                break;
+            case RequestType.MAKE_SCREENSHOT:
+                var makeScreenShotRequest = RawRequest<string, bool>.CreateFrom(message);
+                string fname = makeScreenShotRequest.arg;
+                ScreenCapture.CaptureScreenshot(fname);
+                Respond(client, makeScreenShotRequest, true);
                 break;
             default:
                 throw new Exception("The incoming message could not be handled!\n" + message);

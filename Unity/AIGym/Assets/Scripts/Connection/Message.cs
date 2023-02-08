@@ -18,7 +18,8 @@ public enum RequestType
     START,
     INIT,
     AGENTCOMMAND,
-    UPDATE_ENVIRONMENT
+    UPDATE_ENVIRONMENT,
+    MAKE_SCREENSHOT
 }
 
 /// <summary>
