@@ -16,13 +16,17 @@ using UnityEngine.Events;
 [JsonObject(MemberSerialization.OptIn)]
 public class Colorized : MonoBehaviour
 {
-    [JsonProperty]
+    // [JsonProperty] this BREAKS when the color is not straight red, green, or blue! Strange.
     private Color color;
+    [JsonProperty] // using hand-crafted color-code instead:
+    private ColorCode colorCode ;
 
     public void SetColor (Color c)
     {
         this.color = c;
+        colorCode = new ColorCode(c.r, c.g, c.b);
         transform.Find("Button").GetComponent<MeshRenderer>().material.color = c;
+        //Debug.Log(">>> setting color :" + c);
     }
 
     public Color GetColor()

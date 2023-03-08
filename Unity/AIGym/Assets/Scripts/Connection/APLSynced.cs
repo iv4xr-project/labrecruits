@@ -48,6 +48,7 @@ public class APLSynced : MonoBehaviour, IAPLSerializable
     public void APLSync()
     {
         lastTouched = DateTime.Now;
+        //Debug.Log(">>> invoking APL serializer");
         Debug.Log(APLSerialize().ToString());
     }
 }
