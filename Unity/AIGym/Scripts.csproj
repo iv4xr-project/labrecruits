@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\Utilities\MeshHelper.cs" />
     <Compile Include="Assets\Scripts\Utilities\Tuple.cs" />
     <Compile Include="Assets\Scripts\Utilities\Utils.cs" />
+    <Compile Include="Assets\Scripts\World\Entities\ColorCode.cs" />
     <Compile Include="Assets\Scripts\World\Entities\Colorized.cs" />
     <Compile Include="Assets\Scripts\World\Entities\ColorScreen.cs" />
     <Compile Include="Assets\Scripts\World\Entities\Hazards\FireHazard.cs" />
@@ -687,7 +688,6 @@
     <Reference Include="Boo.Lang">
       <HintPath>/Applications/Unity/Hub/Editor/2019.2.6f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
-    <Compile Include="Assets\Scripts\World\Entities\NewClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NavMeshComponents.csproj">

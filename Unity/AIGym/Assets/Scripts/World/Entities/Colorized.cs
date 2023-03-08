@@ -19,7 +19,7 @@ public class Colorized : MonoBehaviour
     // [JsonProperty] this BREAKS when the color is not straight red, green, or blue! Strange.
     private Color color;
     [JsonProperty] // using hand-crafted color-code instead:
-    private ColorCode colorCode ;
+    public ColorCode colorCode ;
 
     public void SetColor (Color c)
     {
