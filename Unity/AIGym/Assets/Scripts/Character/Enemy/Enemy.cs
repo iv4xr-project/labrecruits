@@ -59,7 +59,11 @@ public class Enemy : IHasMood
         // when it enters the same floor as the current camera floor (due to the incomplete
         // logic there). This should force the monster to become visible:
         Utils.SetVisibility(this.gameObject, this.GetFloor() <= _cameraBehavior.cameraFloor) ;
-        
+
+        if(! GetComponent<Toggleable>().isActive)
+        {
+            return;
+        }
 
         if (!_agent.pathPending && agentManager != null)
             GotoClosestPlayer();

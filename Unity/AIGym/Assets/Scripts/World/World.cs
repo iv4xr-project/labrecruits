@@ -248,6 +248,13 @@ public class World : MonoBehaviour
             instance.GetComponent<Animator>()?.SetBool("toggleState", true);
         }
 
+        if (tile == "m")
+        {
+            // setting the Toggable component of monsters by default to active
+            instance.GetComponent<Toggleable>().isActive = true;
+            Debug.Log(">>> setting a monster initial toggable to active");
+        }
+
         // Linking the Toggable and Interactable behavior-"aspects" of buttons to each other.
         // When the switch is interacted-to (when the event onIteract is invoked), this logic will cause its state to be toggled.
         // Note that in this this will fire the switch's onToggle event.
@@ -324,39 +331,50 @@ public class World : MonoBehaviour
                     UserErrorInfo.ErrorWriter.AddMessage($"Invalid connected object id '{cells[i]}'. The object was not found in the level. Line: {j} Column: {i}");
                     continue;
                 }
-                if (link.GetComponent<Interactable>())
+                if (link.GetComponent<Interactable>()) // link is a button
                 {
-                    // if link is a button, this is the logic to connect it to doors:
 
-
-                    //TODO Apply pseudo-random seed
-                    // Logic to randomly break button connections ... for now this is not done (wireBreaking is always false).
-                    bool broken = wireBreaking && Random.Range(0, 2) == 0;
-
-                    if (!broken)
+                    // this is the logic to connect the button to a door or a colorscreen:
+                    if (connector.tag == "Door" || connector?.GetComponent<ColorScreen>()) 
                     {
-                        // Add the door logic. When the link/switch is interacted to (so, in turn the switch will
-                        // fire onTogle event), we will also toggle this door (which connected to the switch):
-                        if (connector?.GetComponent<Toggleable>())
-                            link.GetComponent<Toggleable>()?.onToggle?.AddListener(_ => connector.GetComponent<Toggleable>().ToggleState());
-                        //if (connector?.GetComponent<Toggleable>())
-                        //    link.GetComponent<Interactable>()?.onInteract?.AddListener(_ => connector.GetComponent<Toggleable>().ToggleState());
+                        //TODO Apply pseudo-random seed
+                        // Logic to randomly break button connections ... for now this is not done (wireBreaking is always false).
+                        bool broken = wireBreaking && Random.Range(0, 2) == 0;
 
-                        if (connector?.GetComponent<ColorScreen>())
-                            link.GetComponent<Interactable>()?.onInteract?.AddListener(connector.GetComponent<ColorScreen>().UpdateScreen);
+                        if (!broken)
+                        {
+                            // Add the door logic. When the link/switch is interacted to (so, in turn the switch will
+                            // fire onTogle event), we will also toggle this door (which connected to the switch):
+                            if (connector?.GetComponent<Toggleable>())
+                                link.GetComponent<Toggleable>()?.onToggle?.AddListener(_ => connector.GetComponent<Toggleable>().ToggleState());
+                            //if (connector?.GetComponent<Toggleable>())
+                            //    link.GetComponent<Interactable>()?.onInteract?.AddListener(_ => connector.GetComponent<Toggleable>().ToggleState());
 
-                        // Handle switches
-                        // WP: not sure if this is needed. I don't think the link/switch will ever receive
-                        // an onToggle(s) event, unless it has been made listener of another switch.
-                        // In this case, when the other switch is interacted, it will auto-trigger an
-                        // onToggle(s) event, where s is the state of the switch. This logic below would
-                        // then propagates the effect to all doors connected to the link.
-                        // But so far we don't actually have a switch connected to anorther switch...
-                        //link.GetComponent<Toggleable>()?.onToggle.AddListener(connector.GetComponent<Toggleable>().SetState);
+                            if (connector?.GetComponent<ColorScreen>())
+                                link.GetComponent<Interactable>()?.onInteract?.AddListener(connector.GetComponent<ColorScreen>().UpdateScreen);
+
+                            // Handle switches
+                            // WP: not sure if this is needed. I don't think the link/switch will ever receive
+                            // an onToggle(s) event, unless it has been made listener of another switch.
+                            // In this case, when the other switch is interacted, it will auto-trigger an
+                            // onToggle(s) event, where s is the state of the switch. This logic below would
+                            // then propagates the effect to all doors connected to the link.
+                            // But so far we don't actually have a switch connected to anorther switch...
+                            //link.GetComponent<Toggleable>()?.onToggle.AddListener(connector.GetComponent<Toggleable>().SetState);
+                        }
+
+                        GameObject wire = _wireBuilder.CreateWire(link.transform, connector.transform, 0.125f, 0.25f, broken);
+                        wire.transform.SetParent(link.transform);
+                    }
+                    else if(connector.tag == "Enemy") // logic for connected monster:
+                    {
+                        connector.GetComponent<Toggleable>().isActive = false;
+                        Debug.Log(">>> setting a monster " + connector.name + " initial toggable to non-active");
+                        link.GetComponent<Toggleable>()?.onToggle?.AddListener(_ => connector.GetComponent<Toggleable>().Activate());
+
                     }
 
-                    GameObject wire = _wireBuilder.CreateWire(link.transform, connector.transform, 0.125f, 0.25f, broken);
-                    wire.transform.SetParent(link.transform);
+
                 }
 
                 if (link.GetComponent<NPC>())

@@ -27,8 +27,19 @@ public class Toggleable : MonoBehaviour
         GetComponent<APLSynced>()?.APLSync();
     }
 
+    /// <summary>
+    /// Toggling the state of this Toggable (true to false and the other way around).
+    /// </summary>
     public void ToggleState()
         => SetState(!isActive);
+
+    /// <summary>
+    /// Set the state of this toggable to true/active.
+    /// </summary>
+    public void Activate()
+    {
+        isActive = true;
+    }
 }
 
 [System.Serializable]
