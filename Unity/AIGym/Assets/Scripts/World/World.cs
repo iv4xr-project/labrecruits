@@ -252,7 +252,7 @@ public class World : MonoBehaviour
         {
             // setting the Toggable component of monsters by default to active
             instance.GetComponent<Toggleable>().isActive = true;
-            Debug.Log(">>> setting a monster initial toggable to active");
+            //Debug.Log(">>> setting a monster initial toggable to active");
         }
 
         // Linking the Toggable and Interactable behavior-"aspects" of buttons to each other.
@@ -369,7 +369,7 @@ public class World : MonoBehaviour
                     else if(connector.tag == "Enemy") // logic for connected monster:
                     {
                         connector.GetComponent<Toggleable>().isActive = false;
-                        Debug.Log(">>> setting a monster " + connector.name + " initial toggable to non-active");
+                        //Debug.Log(">>> setting a monster " + connector.name + " initial toggable to non-active");
                         link.GetComponent<Toggleable>()?.onToggle?.AddListener(_ => connector.GetComponent<Toggleable>().Activate());
 
                     }
