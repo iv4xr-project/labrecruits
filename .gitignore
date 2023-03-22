@@ -29,7 +29,14 @@ Unity/AIGym/*.unitypackage
 .consulo/
 /*.tmp
 /*.svd
- 
+
+# ============ #
+# Rider IDE    #
+# ============ #
+
+Unity/AIGym/.idea/
+Unity/AIGym/AIGym.sln.DotSettings.user 
+
 # ============ #
 # OS generated #
 # ============ #

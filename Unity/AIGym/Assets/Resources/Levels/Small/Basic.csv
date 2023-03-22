@@ -1,6 +1,5 @@
-Button 1,Door 1
-
-w,w,w,w,w,w
+Button 1,Door 1,,,,
+|w,w,w,w,w,w
 w,f:d>n^Door 1,f,f,f,w
 w,f:b^Button 1,f,f,f,w
 w,f:a^0,f,f,f,w
