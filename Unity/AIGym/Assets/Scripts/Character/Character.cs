@@ -43,7 +43,7 @@ public class Character : IHasMood
     private CharacterController _characterController;
     private Animator _animator;
     private Vector3? targetLocation = null;
-    private bool circleLeft = false;
+    //private bool circleLeft = false;
     private Mood _mood;
     private int _health;
     private int _score = 0 ;
@@ -82,7 +82,10 @@ public class Character : IHasMood
         {
             int oldHealth = _health;
             _health = value;
-            if (_health >= oldHealth) return; //we got healed
+            if (_health >= oldHealth)
+            {
+                return; //we got healed
+            }
 
             string[] moods =
             {
@@ -90,7 +93,12 @@ public class Character : IHasMood
                 ":(",
                 "That hurts!"
             };
-            SetMood(moods[UnityEngine.Random.Range(0, moods.Length)]);
+            if (Health > 0)
+                SetMood(moods[UnityEngine.Random.Range(0, moods.Length)]);
+            else
+            {
+                SetMood("Dead...");
+            }
             AudioSource sound = this.gameObject.GetComponent<AudioSource>();
             sound.clip = null;
             if (Health < 30 && Health > 0 && Health % 10 == 0)
@@ -144,6 +152,12 @@ public class Character : IHasMood
     {
 
         if (!IsAlive) return; // otherwise agent-controlled character can still moving
+        if (transform.position.y < -12)
+        {
+            Health = 0;
+            return;
+        }
+        
         if (targetLocation.HasValue)
         {
             //check if we have already reached the target
@@ -158,7 +172,8 @@ public class Character : IHasMood
                 // Important: Whiskers code depends on this being normalized, because it will add to the x and z.
 
                 _moveDirection = new Vector3(diff.x, 0, diff.z).normalized;
-
+                
+                /*
                 bool enableFireAvoidance = false;
                 // disabling the fire-avoidance below, as it conflicts with the way java-agent wants to
                 // cobntrol
@@ -198,6 +213,7 @@ public class Character : IHasMood
                     }
                     #endregion
                 }
+                */
                 if (_moveDirection.x != 0 || _moveDirection.z != 0)
                     model.rotation = Quaternion.Slerp(model.rotation, Quaternion.LookRotation(_moveDirection, Vector3.up), 10f * Time.deltaTime);
             }
@@ -239,12 +255,7 @@ public class Character : IHasMood
         _moveDirection.z = characterSpeed * direction.z;
         wasMoving = true;
     }
-
-    public void SwitchCircleDirection()
-    {
-        this.circleLeft = !this.circleLeft;
-    }
-
+    
     /// <summary>
     /// This method will allow the agent to set a target location where the agent wants to move to, This will
     /// only move the agentin a straight line to the location.

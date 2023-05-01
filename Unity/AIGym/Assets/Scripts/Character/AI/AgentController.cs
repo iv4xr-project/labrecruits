@@ -47,10 +47,10 @@ public class AgentController {
     /// <returns>An observation after the action has been applied</returns>
     public Observation ProcessCommand(Command c, int gameTick, NavMeshContainer nav)
     {
-        if (gameTick % 199 == 0)
-        {
-            _Character.SwitchCircleDirection();
-        }
+        //if (gameTick % 199 == 0)
+        //{
+        //    _Character.SwitchCircleDirection();
+        //}
 
         switch (c.cmd)
         {
