@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6771555623837970462}
   - component: {fileID: -3323479747711707952}
   - component: {fileID: 468426707266749013}
+  - component: {fileID: 6425170280368770323}
   m_Layer: 0
   m_Name: ColorButton
   m_TagString: Switch
@@ -243,6 +244,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6425170280368770323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325024467115219839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0265f2310ee047d5ba93944d1f55cfe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4589033481714612900
 GameObject:
   m_ObjectHideFlags: 0

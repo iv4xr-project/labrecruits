@@ -106,6 +106,7 @@
      <Compile Include="Assets\Scripts\World\Entities\Hazards\Hazard.cs" />
      <Compile Include="Assets\Scripts\World\Entities\Hazards\NPCHazard.cs" />
      <Compile Include="Assets\Scripts\World\Entities\Interactable.cs" />
+     <Compile Include="Assets\Scripts\World\Entities\MagicMouth.cs" />
      <Compile Include="Assets\Scripts\World\Entities\Scoring.cs" />
      <Compile Include="Assets\Scripts\World\Entities\Toggleable.cs" />
      <Compile Include="Assets\Scripts\World\Entities\Wire.cs" />
